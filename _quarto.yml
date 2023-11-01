@@ -1,7 +1,24 @@
 project:
-  title: "Emily Norton"
   type: website
   output-dir: docs
 
+website:
+  title: "Emily Norton"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - about.qmd   # TODO: issue here; TODO: also - not sure why I'm getting 404 error
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    page-layout: full
+
 editor: visual
+
+execute:
+  freeze: auto  # re-render only when source changes
 
