@@ -5,9 +5,9 @@ about:
   template: jolla
 ---
 
-## Quarto
+I am a 2nd year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health  at Johns Hopkins University. As researchers in the field of public health, we have a *lot* of data available to us, and more is being collected everyday. However, these data don't equally represent all communities. I'm interested in how we can make sense of big data, and ways we can fill in missing data, to improve people's quality of life in an equitable way. More specifically, my research focuses on understanding how genetics and environmental factors influence disease risk, and how this risk changes across different populations. I hope my research will help inform patients and doctors about ways to tailor preventive screenings to individuals who need it most, in order to prevent cancer and efficiently use limited resources. 
+<br>
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 ```{r}
 1 + 1
