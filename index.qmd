@@ -1,6 +1,6 @@
 ---
 title: "Emily Norton"
-image: Emily_mt_st_helens.jpg
+image: Emily_mt_st_helens_cropped.jpg
 about:
   template: jolla
 ---

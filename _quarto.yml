@@ -9,6 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd   # TODO: issue here; TODO: also - not sure why I'm getting 404 error
+      - analysis.qmd
 
 format:
   html:

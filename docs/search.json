@@ -26,5 +26,12 @@
     "title": "About",
     "section": "",
     "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "Example Analysis",
+    "section": "",
+    "text": "Add my example analysis here that meets the following requirements:\nA data analysis page called ‘Example analysis’. You can pick any dataset you wish you analyze. In this webpage, you will analyze a dataset and summarize the results. The requirements for this webpage are the following: You must describe what is the question you aim to answer with the data and data analysis. You must describe who is the intended audience for the data analysis. You must describe and link to where the original data come from that you chose. You must include a link to a data dictionary for the data or create one inside the webpage. Your analysis must include some minimal form of data wrangling with you using at least five different functions from dplyr or tidyr. Your analysis should include at least three plots with you using at least three different geom_() functions from ggplot2 (or another package with geom_() functions). Plots should have titles, subtitles, captions, and human-understandable axis labels. At least one plot should using a type of faceting (facet_grid() or facet_wrap()). Your analysis must include one image or table (not one you created yourself, but one you have saved locally or one from the web). Your analysis must include at least two different callout blocks. Your analysis must include a .bib file, which you use to reference at least three unique citations. For example, it could be to a website or paper from where the original data came from or it could be to a paper describing a method you are using to analyze the data. Your analysis must include the use of at least 1 margin content. You must summarize your analysis and/or results with a paragraph (4-6 sentences). At the end of the data analysis, list out each of the functions you used from each of the packages (dplyr, tidyr, and ggplot2) to help the TA with respect to making sure you met all the requirements described above."
   }
 ]
