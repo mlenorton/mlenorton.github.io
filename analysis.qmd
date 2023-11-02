@@ -1,7 +1,115 @@
 ---
-title: "Example Analysis"
+title: "Example analysis"
 
 ---
+
+Load libraries
+```{r}
+library(here)
+library(tidyverse)
+
+```
+Question: How are bird visitors changing over time? Explored by total number over time (standardized by number of bird feeders/sites) and most common birds changing over time?
+
+Load data from TidyTuesday dataset for 30 years of birdwatching:
+
+```{r}
+rds_files <- c("feederwatch.RDS","site_data.RDS")
+
+# Check if any of these files don't exist
+if (any(!file.exists(here("data", rds_files)))) {
+  dir.create(here("data"))
+# if missing, download the data
+feederwatch <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-10/PFW_2021_public.csv')
+site_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-10/PFW_count_site_data_public_2021.csv')
+
+# and save the data objects as RDS files
+saveRDS(feederwatch, file = here("data","feederwatch.RDS"))
+saveRDS(site_data, file = here("data","site_data.RDS"))
+}
+
+feederwatch <- readRDS(here("data","feederwatch.RDS"))
+feederwatch_og <- feederwatch
+site_data <- readRDS(here("data","site_data.RDS"))
+site_data_og <- site_data
+
+```
+
+Clean up data:
+
+Potential issues to address: 
+1. Convert longitude to oE (if we want to map the sites)
+
+
+```{r}
+low_lat <- which(feederwatch$latitude<0)
+feederwatch <- feederwatch[-low_lat,]
+hist(feederwatch$latitude)
+
+feederwatch_df <- feederwatch %>%
+  mutate(Date = ymd(paste(Year, Month, Day, sep="-")),
+         lat_band = case_when(
+           latitude < 35 ~ "low",
+           latitude >=35 & latitude < 45 ~ "mid",
+           latitude >= 45 ~ "high"
+         ))
+
+
+# Note: this is over all locations in the dataset, but maybe we want to chunk it by latitude (to catch some of the migrators?)
+bird_count_per_day <- feederwatch_df %>%
+  group_by(Date, lat_band) %>%
+  summarize(total = sum(how_many),
+            count = n(),
+            std_total = total/count)
+
+
+bird_count_per_bird <- feederwatch_df %>%
+  group_by(species_code) %>%
+  summarize(total = sum(how_many),
+            count = n(),
+            std_total = total/count) %>%
+  arrange(desc(std_total))
+
+
+
+# Figure 1
+bird_count_per_day %>%
+  ggplot(aes(x=Date, y = std_total, color = lat_band)) +   # TODO: add year in x-axis
+  geom_smooth() +   # loess-smoother is default
+  theme_minimal() +   
+  labs(y = "Number of birds / sighting", 
+       title = "Bird sightings per latitude band over time", 
+       color = "Latitude band", 
+       subtitle = "Birds are most commonly sighted at high latitudes, \nbut become more frequent in low latitudes in the winter", 
+       caption = "Data: Project FeederWatch")
+
+
+
+
+
+# Result: seeing more birds in the winter at all latitudes (perhaps because they are coming to the feeders more),
+# but this is especially true for low latitudes - perhaps this is observed because of migration patterns
+
+
+# Explore information for most abundant birds
+
+
+```
+
+Explore trends in total number of birds and number of feeders/reports over time?
+
+```{r}
+glimpse(feederwatch)
+summary(feederwatch)
+
+length(unique(feederwatch$species_code))
+
+
+# potential issues
+
+```
+
+
 
 Add my example analysis here that meets the following requirements:
 
