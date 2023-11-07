@@ -1,5 +1,7 @@
 ---
 title: "Example analysis"
+bibliography: Bib_for_Project_FeederWatch.bib
+csl: nature.csl
 ---
 
 
@@ -29,7 +31,7 @@ This analysis is intended for the general public, as well as the citizen scienti
 
 
 ### Data from Project FeederWatch
-These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/).
+These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/)(@Bonter_and_Greig_2021_Proj_FeederWatch).
 Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance. The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
 
 
@@ -203,7 +205,7 @@ LOESS (locally weighted running line smoother) was used on these curves. This is
 :::
 ### 
 
-Let's now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse, so some of these species may actually be rare, while others have may have limited distributions or be harder to identify. 
+Let's now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse (@Bird_diversity), so some of these species may actually be rare, while others have may have limited distributions or be harder to identify. 
 
 ```{r}
 #| fig-cap: "Histogram of the number of observations per species."
@@ -225,7 +227,7 @@ feederwatch_df %>%
 ```
 
 ::: {.callout-warning title="Rare birds are becoming rarer"}
-In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change.
+In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change @audobon_bird_extinction.
 :::
 
 ### Which birds are most common?  
@@ -278,7 +280,7 @@ USA_map +
   geom_point(data = abundant_birds_df, 
              aes(x = longitude, y = latitude, group=NULL, size=how_many, color=Month), 
              alpha=0.5) +
-  scale_color_manual(values=month_colors) +   # TODO: Fix this - color isn't using my color palette
+  scale_color_manual(values=month_colors) +   
   theme_minimal() + 
   labs(x="Longitude (E)", 
        y="Latitude (N)", 
@@ -301,14 +303,4 @@ dplyr: mutate, group_by, summarize, arrange, filter
 
 ggplot2: geom_smooth, geom_histogram, geom_polygon, geom_bin_2d, geom_point, facet_wrap
 
-
-
-### TODO: Articles to cite:
-https://www.frontiersin.org/articles/10.3389/fevo.2021.619682/full
-https://ny.audubon.org/news/new-audubon-science-two-thirds-north-american-birds-risk-extinction-due-climate-change
-
-
-
-Your analysis must include a .bib file, which you use to reference at least three unique citations.
-For example, it could be to a website or paper from where the original data came from or it could be to a paper describing a method you are using to analyze the data.
 
