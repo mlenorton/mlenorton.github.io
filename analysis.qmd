@@ -293,13 +293,12 @@ USA_map +
 ```
 
 ### Summary
-In this example analysis, we explored patterns in the distribution and abundance of birds observed through the citizen science initiative Project FeederWatch conducted in winter 2020-21. We found that most of the observations for this program were made in the mid-Atlantic and northeast regions of the U.S. This pattern of observation corresponded strongly with the distribution of several of the most common birds, including the American goldfinch, dark-eyed junco, downy woodpecker, and house finch. However, flocking birds tended to have smaller ranges but a larger number of birds reported per observation. In general, birds were most abundant in the coldest months (January-March) and at the highest latitudes (>45N). 
+In this example analysis, we explored patterns in the distribution and abundance of birds observed through the citizen science initiative Project FeederWatch conducted in winter 2020-21. We found that most of the observations for this program were made in the mid-Atlantic and northeast regions of the U.S. This pattern of observation corresponded strongly with the distribution of several of the most common birds, including the American goldfinch, dark-eyed junco, downy woodpecker, and house finch. However, flocking birds tended to have smaller ranges but a larger number of birds reported per observation. In general, birds were most abundant in the coldest months (January-March) and at the highest latitudes (>45ºN). 
 
 
 ### Functions used
 
 dplyr: mutate, group_by, summarize, arrange, filter 
-
 ggplot2: geom_smooth, geom_histogram, geom_polygon, geom_bin_2d, geom_point, facet_wrap
 
 
