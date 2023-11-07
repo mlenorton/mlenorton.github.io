@@ -27,12 +27,11 @@ In this example analysis, I investigate patterns in abundance and distribution o
 * which species are most common, and where are they found
 * which species tend to occur in large flocks, and where are they found 
 
-This analysis is intended for the general public, as well as the citizen scientists involved in Project FeederWatch (and the graders in Biostat 777). 
+This analysis is intended for the general public, as well as the citizen scientists (and the graders for Biostat 777). 
 
 
 ### Data from Project FeederWatch
-These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/)(@Bonter_and_Greig_2021_Proj_FeederWatch).
-Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance. The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
+These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/). Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance. This project has been running for more than 30 years at this point! @Bonter_and_Greig_2021_Proj_FeederWatch The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
 
 
 ```{r}
@@ -178,7 +177,7 @@ USA_map +
 ```
 
 ::: {.callout-tip title="Birdwatching locations"}
-Participants can birdwatch anywhere, it doesn't have to be at their backyard feeder! But remember the distribution of observing locations in this figure - it will be relevant for understanding the distribution of common and flocking birds below.
+Participants can birdwatch anywhere -- it doesn't have to be at their backyard feeder! But remember the distribution of observing locations in this figure since it will be relevant for understanding the distribution of common and flocking birds examined below.
 :::
 
 Since most bird-watching happens in the mid-latitudes (defined here as 35-45ºN), we must standardize the number of birds by the number of observations. The following figure indicates that birds are more abundant at higher latitudes even though there are fewer total observations. However, birds become more common at lower latitudes (<35ºN) from January to March. This may be explained by migration to southern regions during the coldest months of the year. The fact that more birds are reported within every latitudinal band during the coldest months may indicate that more birds visit feeders to obtain food during the harshest conditions of the year.
@@ -205,7 +204,7 @@ LOESS (locally weighted running line smoother) was used on these curves. This is
 :::
 ### 
 
-Let's now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse (@Bird_diversity), so some of these species may actually be rare, while others have may have limited distributions or be harder to identify. 
+Let's now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse, @Bird_diversity so some of these species may actually be rare, while others have may have limited distributions or be harder to identify. 
 
 ```{r}
 #| fig-cap: "Histogram of the number of observations per species."
@@ -227,7 +226,7 @@ feederwatch_df %>%
 ```
 
 ::: {.callout-warning title="Rare birds are becoming rarer"}
-In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change @audobon_bird_extinction.
+In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change. @audobon_bird_extinction
 :::
 
 ### Which birds are most common?  

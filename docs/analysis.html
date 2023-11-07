@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Emily Norton - Example Analysis</title>
+<title>Emily Norton - Example analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -90,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./analysis.html" rel="" target="" aria-current="page">
- <span class="menu-text">Example Analysis</span></a>
+ <span class="menu-text">Example analysis</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools">
@@ -103,15 +122,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#project-aims" id="toc-project-aims" class="nav-link active" data-scroll-target="#project-aims">Project aims</a></li>
+  <li><a href="#data-from-project-feederwatch" id="toc-data-from-project-feederwatch" class="nav-link" data-scroll-target="#data-from-project-feederwatch">Data from Project FeederWatch</a></li>
+  <li><a href="#where-are-birds-observed" id="toc-where-are-birds-observed" class="nav-link" data-scroll-target="#where-are-birds-observed">Where are birds observed?</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#which-birds-are-most-common" id="toc-which-birds-are-most-common" class="nav-link" data-scroll-target="#which-birds-are-most-common">Which birds are most common?</a></li>
+  <li><a href="#which-birds-are-usually-found-in-a-flock" id="toc-which-birds-are-usually-found-in-a-flock" class="nav-link" data-scroll-target="#which-birds-are-usually-found-in-a-flock">Which birds are usually found in a flock?</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#functions-used" id="toc-functions-used" class="nav-link" data-scroll-target="#functions-used">Functions used</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content page-columns page-full column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Example Analysis</h1>
+<h1 class="title">Example analysis</h1>
 </div>
 
 
@@ -126,12 +159,212 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Add my example analysis here that meets the following requirements:</p>
-<p>A data analysis page called ‘Example analysis’. You can pick any dataset you wish you analyze. In this webpage, you will analyze a dataset and summarize the results. The requirements for this webpage are the following: You must describe what is the question you aim to answer with the data and data analysis. You must describe who is the intended audience for the data analysis. You must describe and link to where the original data come from that you chose. You must include a link to a data dictionary for the data or create one inside the webpage. Your analysis must include some minimal form of data wrangling with you using at least five different functions from dplyr or tidyr. Your analysis should include at least three plots with you using at least three different geom_<em>() functions from ggplot2 (or another package with geom_</em>() functions). Plots should have titles, subtitles, captions, and human-understandable axis labels. At least one plot should using a type of faceting (facet_grid() or facet_wrap()). Your analysis must include one image or table (not one you created yourself, but one you have saved locally or one from the web). Your analysis must include at least two different callout blocks. Your analysis must include a .bib file, which you use to reference at least three unique citations. For example, it could be to a website or paper from where the original data came from or it could be to a paper describing a method you are using to analyze the data. Your analysis must include the use of at least 1 margin content. You must summarize your analysis and/or results with a paragraph (4-6 sentences). At the end of the data analysis, list out each of the functions you used from each of the packages (dplyr, tidyr, and ggplot2) to help the TA with respect to making sure you met all the requirements described above.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dark_eyed_junco_ProjectFeederwatch.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">The dark-eyed junco was the most commonly observed species in Project FeederWatch in winter 2020-21. <br> Photo credit: Bob Vuxinic, submitted to Project FeederWatch</figcaption>
+</figure>
+</div>
+<section id="project-aims" class="level3">
+<h3 class="anchored" data-anchor-id="project-aims">Project aims</h3>
+<p>In this example analysis, I investigate patterns in abundance and distribution of birds in the 2020-21 winter in the United States and southern Canada. Specifically, I aim to answer the following questions:</p>
+<ul>
+<li>when and where are birds observed</li>
+<li>which species are most common, and where are they found</li>
+<li>which species tend to occur in large flocks, and where are they found</li>
+</ul>
+<p>This analysis is intended for the general public, as well as the citizen scientists (and the graders for Biostat 777).</p>
+</section>
+<section id="data-from-project-feederwatch" class="level3">
+<h3 class="anchored" data-anchor-id="data-from-project-feederwatch">Data from Project FeederWatch</h3>
+<p>These data were discovered via <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10">TidyTuesday for January 1, 2023</a>, but originally come from <a href="https://feederwatch.org/">Project FeederWatch</a>. Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance. This project has been running for more than 30 years at this point!<span class="citation" data-cites="Bonter_and_Greig_2021_Proj_FeederWatch"><sup><a href="#ref-Bonter_and_Greig_2021_Proj_FeederWatch" role="doc-biblioref">1</a></sup></span> The data dictionary is available <a href="https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view">here</a>.</p>
+</section>
+<section id="where-are-birds-observed" class="level3">
+<h3 class="anchored" data-anchor-id="where-are-birds-observed">Where are birds observed?</h3>
+<p>In order to understand trends in bird distribution and abundance, we first need to know where our observations are coming from. Here is a figure showing the locations of observations. The points are transparent, so denser bird-watching areas are shaded darker green.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-obs-loc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="analysis_files/figure-html/fig-obs-loc-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Observing locations for Project FeederWatch 2020-21 winter.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Birdwatching locations">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Birdwatching locations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Participants can birdwatch anywhere – it doesn’t have to be at their backyard feeder! But remember the distribution of observing locations in this figure since it will be relevant for understanding the distribution of common and flocking birds examined below.</p>
+</div>
+</div>
+<p>Since most bird-watching happens in the mid-latitudes (defined here as 35-45ºN), we must standardize the number of birds by the number of observations. The following figure indicates that birds are more abundant at higher latitudes even though there are fewer total observations. However, birds become more common at lower latitudes (&lt;35ºN) from January to March. This may be explained by migration to southern regions during the coldest months of the year. The fact that more birds are reported within every latitudinal band during the coldest months may indicate that more birds visit feeders to obtain food during the harshest conditions of the year.</p>
+</section>
+<section id="section" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="section"></h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-lat-band" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="analysis_files/figure-html/fig-lat-band-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Total number of birds observed within each latitudinal band (high: &gt;=45ºN, mid: 35-45ºN, low: &lt;35ºN).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>LOESS (locally weighted running line smoother) was used on these curves. This is the default option for geom_smooth.</p>
+</div></div></section>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1"></h3>
+<p>Let’s now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse,<span class="citation" data-cites="Bird_diversity"><sup><a href="#ref-Bird_diversity" role="doc-biblioref">2</a></sup></span> so some of these species may actually be rare, while others have may have limited distributions or be harder to identify.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-hist-obs" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="analysis_files/figure-html/fig-hist-obs-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Histogram of the number of observations per species.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Rare birds are becoming rarer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rare birds are becoming rarer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change.<span class="citation" data-cites="audobon_bird_extinction"><sup><a href="#ref-audobon_bird_extinction" role="doc-biblioref">3</a></sup></span></p>
+</div>
+</div>
+</section>
+<section id="which-birds-are-most-common" class="level3">
+<h3 class="anchored" data-anchor-id="which-birds-are-most-common">Which birds are most common?</h3>
+<p>You’ll probably recognize the names of some of the most common birds! These birds were identified as “common” in the data set because they had the most observations (though not necessarily the highest total count of individuals).</p>
+<div class="cell" data-caption="Most commonly observed birds in the 2020-21 winter in Project FeederWatch.">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Most commonly observed birds in the 2020-21 winter in Project FeederWatch.</caption>
+<colgroup>
+<col style="width: 34%">
+<col style="width: 31%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Common name</th>
+<th style="text-align: left;">Scientific name</th>
+<th style="text-align: right;">Number of observations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dark-Eyed Junco</td>
+<td style="text-align: left;">Junco hyemalis</td>
+<td style="text-align: right;">5465</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Downy Woodpecker</td>
+<td style="text-align: left;">Picoides pubescens</td>
+<td style="text-align: right;">5449</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Northern Cardinal</td>
+<td style="text-align: left;">Cardinalis cardinalis</td>
+<td style="text-align: right;">5438</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">House Finch</td>
+<td style="text-align: left;">Haemorhous mexicanus</td>
+<td style="text-align: right;">4955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mourning Dove</td>
+<td style="text-align: left;">Zenaida macroura</td>
+<td style="text-align: right;">4938</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black-Capped Chickadee</td>
+<td style="text-align: left;">Poecile atricapillus</td>
+<td style="text-align: right;">4696</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Blue Jay</td>
+<td style="text-align: left;">Cyanocitta cristata</td>
+<td style="text-align: right;">4578</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Goldfinch</td>
+<td style="text-align: left;">Spinus tristis</td>
+<td style="text-align: right;">4446</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White-Breasted Nuthatch</td>
+<td style="text-align: left;">Sitta carolinensis</td>
+<td style="text-align: right;">4393</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Most of the common birds were observed throughout the U.S. (or at least where people were reportedly birdwatching, see <a href="#fig-obs-loc">Figure&nbsp;1</a>). However, some birds had more limited distributions. For example, the blue jay and the northern cardinal were found predominantly in the eastern half of the U.S., and the black-capped chickadee was only observed in the more northern latitudes.</p>
+<div id="fig-common" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="./figs/Commonly_sighted_birds.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Heatmap of observations for the most common birds.</figcaption>
+</figure>
+</div>
+</section>
+<section id="which-birds-are-usually-found-in-a-flock" class="level3">
+<h3 class="anchored" data-anchor-id="which-birds-are-usually-found-in-a-flock">Which birds are usually found in a flock?</h3>
+<p>Have you heard the saying that “birds of a feather flock together”? The birds in the figure below had the highest average abundance per observation. This indicates to me that these birds tend to appear most often in large flocks.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-flock" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="analysis_files/figure-html/fig-flock-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Month and location for bird species with the largest average count per observation. The size of the circle is relative to the flock size, and the color indicates the month when the observation was made.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>In this example analysis, we explored patterns in the distribution and abundance of birds observed through the citizen science initiative Project FeederWatch conducted in winter 2020-21. We found that most of the observations for this program were made in the mid-Atlantic and northeast regions of the U.S. This pattern of observation corresponded strongly with the distribution of several of the most common birds, including the American goldfinch, dark-eyed junco, downy woodpecker, and house finch. However, flocking birds tended to have smaller ranges but a larger number of birds reported per observation. In general, birds were most abundant in the coldest months (January-March) and at the highest latitudes (&gt;45N).</p>
+</section>
+<section id="functions-used" class="level3">
+<h3 class="anchored" data-anchor-id="functions-used">Functions used</h3>
+<p>dplyr: mutate, group_by, summarize, arrange, filter</p>
+<p>ggplot2: geom_smooth, geom_histogram, geom_polygon, geom_bin_2d, geom_point, facet_wrap</p>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-line-spacing="2" role="list">
+<div id="ref-Bonter_and_Greig_2021_Proj_FeederWatch" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Bonter, D. N. &amp; Grieg, E. I. Over 30 years of standardized bird counts at supplementary feeding stations in north america: A citizen science data report for project FeederWatch. <em>Frontiers in Ecology and Evolution</em> <strong>31</strong>, (2021).</div>
+</div>
+<div id="ref-Bird_diversity" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Wong, K. How birds evolved their incredible diversity. <em>Scientific American</em> (2020).</div>
+</div>
+<div id="ref-audobon_bird_extinction" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Wilsey, C. <em>et al.</em> <em>Survival by degrees: 389 bird species on the brink</em>. (2019).</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
