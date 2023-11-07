@@ -298,7 +298,7 @@ In this example analysis, we explored patterns in the distribution and abundance
 
 ### Functions used
 
-dplyr: mutate, group_by, summarize, arrange, filter 
+dplyr: mutate, group_by, summarize, arrange, filter  
 ggplot2: geom_smooth, geom_histogram, geom_polygon, geom_bin_2d, geom_point, facet_wrap
 
 
