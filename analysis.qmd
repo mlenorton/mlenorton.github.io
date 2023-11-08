@@ -5,7 +5,7 @@ csl: nature.csl
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 # Load libraries
 library(here)
 library(tidyverse)
