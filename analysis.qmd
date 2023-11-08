@@ -2,8 +2,10 @@
 title: "Example analysis"
 bibliography: Bib_for_Project_FeederWatch.bib
 csl: nature.csl
-code-fold: true
-code-summary: "Show the code"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
