@@ -35,6 +35,8 @@ This project has been running for more than 30 years at this point!
 @Bonter_and_Greig_2021_Proj_FeederWatch The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
 
 ```{r}
+# Load data and do quick exploration/clean-up
+
 # List required files to download from TidyTuesday
 rds_files <- c("feederwatch.RDS","site_data.RDS")
 
@@ -58,9 +60,7 @@ site_data_og <- site_data
 # had to save the species_codes dictionary manually from https://docs.google.com/spreadsheets/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/edit#gid=2040245914
 species_codes_dd <- read_csv(here("data","FeederWatch_Data_Dictionary_Species_Codes.csv"),skip = 1)
 
-```
 
-```{r}
 # Quick data exploration, clean up, and creation of a few useful data frames 
 # glimpse(feederwatch)
 # summary(feederwatch)
@@ -140,9 +140,9 @@ commonly_sighted_birds_df <- feederwatch_df %>%
    left_join(species_codes_dd, 
              by=join_by(species_code==SPECIES_CODE)) %>%
    mutate(Month=factor(Month, levels=c("11","12","1","2","3","4")))
-
-
 ```
+
+
 ### Where are birds observed?
 
 In order to understand trends in bird distribution and abundance, we first need to know where our observations are coming from.
@@ -150,6 +150,14 @@ Here is a figure showing the locations of observations.
 The points are transparent, so denser bird-watching areas are shaded darker green.
 
 ```{r}
+
+```
+
+```{r}
+#| fig-cap: "Observing locations for Project FeederWatch 2020-21 winter."
+#| label: fig-obs-loc
+# Figure 1: Map of unique sighting locations
+
 # Prep maps of America/USA for making figures
 america_map <- map_data("world", region='USA')
 USA_map <-
@@ -161,13 +169,7 @@ USA_map <-
   coord_map() +
   theme_minimal()
 
-
-```
-
-```{r}
-#| fig-cap: "Observing locations for Project FeederWatch 2020-21 winter."
-#| label: fig-obs-loc
-# Figure 1: Identify unique sighting locations
+# Identify unique sighting locations
 unique_sighting_locations <- feederwatch %>%
   group_by(loc_id) %>%
   summarize(n_obs = n(),
@@ -288,7 +290,7 @@ common_birds_plot <- USA_map +
   labs(x="Longitude (E)", 
        y="Latitude (N)", 
        title="Observations of common birds in the US and southern Canada", 
-       subtitle="Common bird species are most frequently observed in the Mid-Atlantic and \nNortheast regions, likely due (in part) to a sampling bias and easy bird identification",  # may not want to add all of this here??
+       subtitle="Common bird species are most frequently observed in the Mid-Atlantic and \nNortheast regions, likely due (in part) to a sampling bias and easy bird identification", 
        color="Month") + 
   facet_wrap(vars(PRIMARY_COM_NAME), 
              labeller = labeller(PRIMARY_COM_NAME = label_wrap_gen(width = 10)))
