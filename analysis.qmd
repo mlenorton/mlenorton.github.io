@@ -2,39 +2,42 @@
 title: "Example analysis"
 bibliography: Bib_for_Project_FeederWatch.bib
 csl: nature.csl
+code-fold: true
+code-summary: "Show the code"
 ---
-
-
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
 # Load libraries
 library(here)
 library(tidyverse)
-#library(usmap)
 library(maps)
 library(mapproj)
-#library(wordcloud)
 library(lemon)     # pretty tables with kable
 ```
 
-![The dark-eyed junco was the most commonly observed species in Project FeederWatch in winter 2020-21. <br> Photo credit: Bob Vuxinic, submitted to Project FeederWatch](dark_eyed_junco_ProjectFeederwatch.png){width=50%}
+![The dark-eyed junco was the most commonly observed species in Project FeederWatch in winter 2020-21. <br> Photo credit: Bob Vuxinic, submitted to Project FeederWatch](dark_eyed_junco_ProjectFeederwatch.png){width="50%"}
 
 ### Project aims
-In this example analysis, I investigate patterns in abundance and distribution of birds in the 2020-21 winter in the United States and southern Canada. Specifically, I aim to answer the following questions:
 
-* when and where are birds observed
-* which species are most common, and where are they found
-* which species tend to occur in large flocks, and where are they found 
+In this example analysis, I investigate patterns in abundance and distribution of birds in the 2020-21 winter in the United States and southern Canada.
+Specifically, I aim to answer the following questions:
 
-This analysis is intended for the general public, as well as the citizen scientists (and the graders for Biostat 777). 
+-   when and where are birds observed
+-   which species are most common, and where are they found
+-   which species tend to occur in large flocks, and where are they found
 
+This analysis is intended for the general public, as well as the citizen scientists (and the graders for Biostat 777).
 
 ### Data from Project FeederWatch
-These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/). Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance. This project has been running for more than 30 years at this point! @Bonter_and_Greig_2021_Proj_FeederWatch The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
 
+These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/).
+Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance.
+This project has been running for more than 30 years at this point!
+@Bonter_and_Greig_2021_Proj_FeederWatch The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
 
 ```{r}
+# List required files to download from TidyTuesday
 rds_files <- c("feederwatch.RDS","site_data.RDS")
 
 # Check if any of these files don't exist
@@ -44,17 +47,17 @@ if (any(!file.exists(here("data", rds_files)))) {
 feederwatch <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-10/PFW_2021_public.csv')
 site_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-10/PFW_count_site_data_public_2021.csv')
 
-#data_dict <- readr::read_table("https://docs.google.com/spreadsheets/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/edit#gid=2040245914")  # this doesn't work...but we can save the species_codes dictionary and load them individually
-
-# and save the data objects as RDS files
+# save the data objects as RDS files
 saveRDS(feederwatch, file = here("data","feederwatch.RDS"))
 saveRDS(site_data, file = here("data","site_data.RDS"))
 }
 
+# Load data
 feederwatch <- readRDS(here("data","feederwatch.RDS"))
 feederwatch_og <- feederwatch
 site_data <- readRDS(here("data","site_data.RDS"))
 site_data_og <- site_data
+# had to save the species_codes dictionary manually from https://docs.google.com/spreadsheets/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/edit#gid=2040245914
 species_codes_dd <- read_csv(here("data","FeederWatch_Data_Dictionary_Species_Codes.csv"),skip = 1)
 
 ```
@@ -69,7 +72,7 @@ species_codes_dd <- read_csv(here("data","FeederWatch_Data_Dictionary_Species_Co
 species_codes_dd$PRIMARY_COM_NAME <- str_to_title(species_codes_dd$PRIMARY_COM_NAME)
 
 # Check for outliers in space
-low_lat <- which(feederwatch$latitude<0)   # length=1; this point appears to be erroneous
+low_lat <- which(feederwatch$latitude<0)   # length=1; this point appears to be erroneous - remove it below
 high_lat <- which(feederwatch$latitude>50) # these are not erroneous, but want to narrow to US for plotting later on
 
 # Get rid of the one low-latitude observation
@@ -86,15 +89,14 @@ feederwatch_df <- feederwatch %>%
          )) 
 feederwatch_df$lat_band <- factor(feederwatch_df$lat_band, levels=c("high","mid","low"))
 
-
-
-# Note: this is over all locations in the dataset, but maybe we want to chunk it by latitude (to catch some of the migrators?)
+# Make useful dataframes:
+# Total bird count per day 
 bird_count_per_day <- feederwatch_df %>%
-  group_by(Date, lat_band) %>%
+  group_by(Date, 
+           lat_band) %>%
   summarize(total = sum(how_many),
             count = n(),
             std_total = total/count)
-
 
 # Abundant birds: birds that have highest counts in the dataset - i.e. flocking birds
 abundant_birds <- feederwatch_df %>%
@@ -105,17 +107,21 @@ abundant_birds <- feederwatch_df %>%
             std_total = total/count) %>%
   arrange(desc(std_total)) %>%
   head(n=9) %>%
-  left_join(species_codes_dd, by=join_by(species_code==SPECIES_CODE)) %>%
-  select(species_code, PRIMARY_COM_NAME, SCI_NAME, count)
+  left_join(species_codes_dd, 
+            by=join_by(species_code==SPECIES_CODE)) %>%
+  select(species_code, 
+         PRIMARY_COM_NAME, 
+         SCI_NAME, count)
 
 # join with species info:
 abundant_birds_df <- feederwatch_df %>%
    filter(species_code %in% abundant_birds$species_code) %>%
-   left_join(species_codes_dd, by=join_by(species_code==SPECIES_CODE)) %>%
+   left_join(species_codes_dd, 
+             by=join_by(species_code==SPECIES_CODE)) %>%
    mutate(Month=factor(Month, levels=c("11","12","1","2","3","4")))
 
 
-# Common birds: irds that have several records in the dataset
+# Common birds: birds that have several records in the dataset
 commonly_sighted_birds <- feederwatch_df %>%
   group_by(species_code) %>%
   summarize(total = sum(how_many),
@@ -123,27 +129,34 @@ commonly_sighted_birds <- feederwatch_df %>%
             std_total = total/count) %>%
   arrange(desc(count)) %>%
   head(n=9) %>%
-  left_join(species_codes_dd, by=join_by(species_code==SPECIES_CODE)) %>%
-  select(species_code, PRIMARY_COM_NAME, SCI_NAME, count)
+  left_join(species_codes_dd, 
+            by=join_by(species_code==SPECIES_CODE)) %>%
+  select(species_code, 
+         PRIMARY_COM_NAME, 
+         SCI_NAME, 
+         count)
 
 # join with species info:
 commonly_sighted_birds_df <- feederwatch_df %>%
    filter(species_code %in% commonly_sighted_birds$species_code) %>%
-   left_join(species_codes_dd, by=join_by(species_code==SPECIES_CODE)) %>%
+   left_join(species_codes_dd, 
+             by=join_by(species_code==SPECIES_CODE)) %>%
    mutate(Month=factor(Month, levels=c("11","12","1","2","3","4")))
 
 
 ```
-
-
 ### Where are birds observed?
-In order to understand trends in bird distribution and abundance, we first need to know where our observations are coming from. Here is a figure showing the locations of observations. The points are transparent, so denser bird-watching areas are shaded darker green. 
+
+In order to understand trends in bird distribution and abundance, we first need to know where our observations are coming from.
+Here is a figure showing the locations of observations.
+The points are transparent, so denser bird-watching areas are shaded darker green.
 
 ```{r}
 # Prep maps of America/USA for making figures
 america_map <- map_data("world", region='USA')
 USA_map <-
-  ggplot(america_map, aes(x=long, y=lat, group=group)) +
+  ggplot(america_map, 
+         aes(x=long, y=lat, group=group)) +
   geom_polygon(fill="white",color="black") + 
   scale_x_continuous(limits = c(-125,-65)) +
   scale_y_continuous(limits = c(25, 50)) + 
@@ -153,16 +166,17 @@ USA_map <-
 
 ```
 
-
 ```{r}
 #| fig-cap: "Observing locations for Project FeederWatch 2020-21 winter."
 #| label: fig-obs-loc
-# Plot all sighting locations
+# Figure 1: Identify unique sighting locations
 unique_sighting_locations <- feederwatch %>%
   group_by(loc_id) %>%
   summarize(n_obs = n(),
             latitude=mean(latitude),
             longitude=mean(longitude))
+
+# Plot unique sighting locations
 USA_map +
   geom_point(data=unique_sighting_locations, 
              aes(x = longitude, y = latitude, group=NULL), 
@@ -177,16 +191,22 @@ USA_map +
 ```
 
 ::: {.callout-tip title="Birdwatching locations"}
-Participants can birdwatch anywhere -- it doesn't have to be at their backyard feeder! But remember the distribution of observing locations in this figure since it will be relevant for understanding the distribution of common and flocking birds examined below.
+Participants can birdwatch anywhere -- it doesn't have to be at their backyard feeder!
+But remember the distribution of observing locations in this figure since it will be relevant for understanding the distribution of common and flocking birds examined below.
 :::
 
-Since most bird-watching happens in the mid-latitudes (defined here as 35-45ºN), we must standardize the number of birds by the number of observations. The following figure indicates that birds are more abundant at higher latitudes even though there are fewer total observations. However, birds become more common at lower latitudes (<35ºN) from January to March. This may be explained by migration to southern regions during the coldest months of the year. The fact that more birds are reported within every latitudinal band during the coldest months may indicate that more birds visit feeders to obtain food during the harshest conditions of the year.
+Since most bird-watching happens in the mid-latitudes (defined here as 35-45ºN), we must standardize the number of birds by the number of observations.
+The following figure indicates that birds are more abundant at higher latitudes even though there are fewer total observations.
+However, birds become more common at lower latitudes (\<35ºN) from January to March.
+This may be explained by migration to southern regions during the coldest months of the year.
+The fact that more birds are reported within every latitudinal band during the coldest months may indicate that more birds visit feeders to obtain food during the harshest conditions of the year.
 
 ### 
+
 ```{r}
 #| fig-cap: "Total number of birds observed within each latitudinal band (high: >=45ºN, mid: 35-45ºN, low: <35ºN)."
 #| label: fig-lat-band
-# Figure 1: Bird count per latitude band
+# Figure 2: Bird count per latitude band
 bird_count_per_day %>%
   ggplot(aes(x=Date, y = std_total, color = lat_band)) +   
   geom_smooth() +   # loess-smoother is default
@@ -199,22 +219,29 @@ bird_count_per_day %>%
 
 ```
 
-::: {.column-margin}
-LOESS (locally weighted running line smoother) was used on these curves. This is the default option for geom_smooth. 
+::: column-margin
+LOESS (locally weighted running line smoother) was used on these curves.
+This is the default option for geom_smooth.
 :::
+
 ### 
 
-Let's now explore how often different species are observed. A total of 361 unique species were reported, but most of these species were only observed once! However, the most common species were observed thousands of times! This is probably explained in part because birds are incredibly diverse, @Bird_diversity so some of these species may actually be rare, while others have may have limited distributions or be harder to identify. 
+Let's now explore how often different species are observed.
+A total of 361 unique species were reported, but most of these species were only observed once!
+However, the most common species were observed thousands of times!
+This is probably explained in part because birds are incredibly diverse, @Bird_diversity so some of these species may actually be rare, while others have may have limited distributions or be harder to identify.
 
 ```{r}
 #| fig-cap: "Histogram of the number of observations per species."
 #| label: fig-hist-obs
-# Figure 2: Histogram of bird observations per species
+# Figure 3: Histogram of bird observations per species
 feederwatch_df %>%
   group_by(species_code) %>%
   summarize(n_obs = n()) %>%
   ggplot() +
-  geom_histogram(aes(n_obs), boundary=0, closed="left") +
+  geom_histogram(aes(n_obs), 
+                 boundary=0, 
+                 closed="left") +
   labs(x = "Number of observations for a given species", 
        y = "Frequency", 
        title = "Number of observations per bird species",
@@ -226,11 +253,14 @@ feederwatch_df %>%
 ```
 
 ::: {.callout-warning title="Rare birds are becoming rarer"}
-In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change. @audobon_bird_extinction
+In 2019, the National Audubon Society estimated that two-thirds of North American birds were at risk of extinction due to climate change.
+@audobon_bird_extinction
 :::
 
-### Which birds are most common?  
-You'll probably recognize the names of some of the most common birds! These birds were identified as "common" in the data set because they had the most observations (though not necessarily the highest total count of individuals).
+### Which birds are most common?
+
+You'll probably recognize the names of some of the most common birds!
+These birds were identified as "common" in the data set because they had the most observations (though not necessarily the highest total count of individuals).
 
 ```{r caption="Most commonly observed birds in the 2020-21 winter in Project FeederWatch.", render=lemon_print}
 # Table 1
@@ -242,36 +272,45 @@ commonly_sighted_birds_table
 
 ```
 
-Most of the common birds were observed throughout the U.S. (or at least where people were reportedly birdwatching, see @fig-obs-loc). However, some birds had more limited distributions. For example, the blue jay and the northern cardinal were found predominantly in the eastern half of the U.S., and the black-capped chickadee was only observed in the more northern latitudes. 
+Most of the common birds were observed throughout the U.S. (or at least where people were reportedly birdwatching, see @fig-obs-loc).
+However, some birds had more limited distributions.
+For example, the blue jay and the northern cardinal were found predominantly in the eastern half of the U.S., and the black-capped chickadee was only observed in the more northern latitudes.
+
 ```{r, eval=FALSE}
-# Fig 3/4: Commonly sighted birds
-# Since this figure takes forever to render, we'll just load in the saved figure below.
+# Figure 4: Commonly sighted birds
+# Since this figure takes a long time to render, we'll just load in the saved figure below, but this is the code that was used to generate it:
   
 common_birds_plot <- USA_map +
-#  ggplot(data = commonly_sighted_birds_df, aes(x = longitude, y = latitude, group=NULL, color=Month)) +
-  geom_bin_2d(data = commonly_sighted_birds_df, aes(x = longitude, y = latitude, group=NULL)) +
-  scale_fill_continuous(low="lightskyblue1", high="indianred4", name="Number of \nsightings") +
+  geom_bin_2d(data = commonly_sighted_birds_df, 
+              aes(x = longitude, y = latitude, group=NULL)) +
+  scale_fill_continuous(low="lightskyblue1", 
+                        high="indianred4", 
+                        name="Number of \nsightings") +
   theme_minimal() + 
   labs(x="Longitude (E)", 
        y="Latitude (N)", 
        title="Observations of common birds in the US and southern Canada", 
        subtitle="Common bird species are most frequently observed in the Mid-Atlantic and \nNortheast regions, likely due (in part) to a sampling bias and easy bird identification",  # may not want to add all of this here??
        color="Month") + 
-  facet_wrap(vars(PRIMARY_COM_NAME), labeller = labeller(PRIMARY_COM_NAME = label_wrap_gen(width = 10)))
+  facet_wrap(vars(PRIMARY_COM_NAME), 
+             labeller = labeller(PRIMARY_COM_NAME = label_wrap_gen(width = 10)))
 #ggsave(here("figs","Commonly_sighted_birds.png"), plot=common_birds_plot, width=7, height=7, units="in")
-
 ```
-:::{#fig-common fig-cap="Heatmap of observations for the most common birds."}
-![](./figs/Commonly_sighted_birds.png){width=75%}
+
+::: {#fig-common fig-cap="Heatmap of observations for the most common birds."}
+![](./figs/Commonly_sighted_birds.png){width="75%"}
 :::
 
-### Which birds are usually found in a flock?  
-Have you heard the saying that "birds of a feather flock together"? The birds in the figure below had the highest average abundance per observation. This indicates to me that these birds tend to appear most often in large flocks.
+### Which birds are usually found in a flock?
+
+Have you heard the saying that "birds of a feather flock together"?
+The birds in the figure below had the highest average abundance per observation.
+This indicates to me that these birds tend to appear most often in large flocks.
 
 ```{r}
 #| fig-cap: "Month and location for bird species with the largest average count per observation. The size of the circle is relative to the flock size, and the color indicates the month when the observation was made."
 #| label: fig-flock
-# Figure 4/5: Most abundant birds (i.e. probably largest flocks)
+# Figure 5: Most abundant birds (i.e. probably largest flocks)
 # focus on birds in US (or below 50oN):
 month_colors = c("sandybrown","indianred","slateblue3","royalblue","palegreen3")
 
@@ -293,12 +332,14 @@ USA_map +
 ```
 
 ### Summary
-In this example analysis, we explored patterns in the distribution and abundance of birds observed through the citizen science initiative Project FeederWatch conducted in winter 2020-21. We found that most of the observations for this program were made in the mid-Atlantic and northeast regions of the U.S. This pattern of observation corresponded strongly with the distribution of several of the most common birds, including the American goldfinch, dark-eyed junco, downy woodpecker, and house finch. However, flocking birds tended to have smaller ranges but a larger number of birds reported per observation. In general, birds were most abundant in the coldest months (January-March) and at the highest latitudes (>45ºN). 
 
+In this example analysis, we explored patterns in the distribution and abundance of birds observed through the citizen science initiative Project FeederWatch conducted in winter 2020-21.
+We found that most of the observations for this program were made in the mid-Atlantic and northeast regions of the U.S.
+This pattern of observation corresponded strongly with the distribution of several of the most common birds, including the American goldfinch, dark-eyed junco, downy woodpecker, and house finch.
+However, flocking birds tended to have smaller ranges but a larger number of birds reported per observation.
+In general, birds were most abundant in the coldest months (January-March) and at the highest latitudes (\>45ºN).
 
 ### Functions used
 
-dplyr: mutate, group_by, summarize, arrange, filter  
+dplyr: mutate, group_by, summarize, arrange, filter\
 ggplot2: geom_smooth, geom_histogram, geom_polygon, geom_bin_2d, geom_point, facet_wrap
-
-
