@@ -29,7 +29,7 @@ This analysis is intended for the general public, as well as the citizen scienti
 
 ### Data from Project FeederWatch
 
-These data were discovered via [TidyTuesday for January 1, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/).
+These data were discovered via [TidyTuesday for January 10, 2023](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-01-10), but originally come from [Project FeederWatch](https://feederwatch.org/).
 Project FeederWatch is a citizen science project that aims to engage individuals in North America to count birds (for as long or as little as they like) to track winter trends in bird distribution and abundance.
 This project has been running for more than 30 years at this point!
 @Bonter_and_Greig_2021_Proj_FeederWatch The data dictionary is available [here](https://drive.google.com/file/d/1kHmx2XhA2MJtEyTNMpwqTQEnoa9M7Il2/view).
@@ -141,7 +141,6 @@ commonly_sighted_birds_df <- feederwatch_df %>%
              by=join_by(species_code==SPECIES_CODE)) %>%
    mutate(Month=factor(Month, levels=c("11","12","1","2","3","4")))
 ```
-
 
 ### Where are birds observed?
 
