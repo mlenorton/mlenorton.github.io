@@ -1,0 +1,139 @@
+---
+title: "Ballot Drop Boxes"
+
+---
+
+```{r setup, include=FALSE}
+library(sf)
+#library(tmap)
+library(tidyverse)
+#library(leaflet)
+#library(ggmap)  # requires API for google map
+library(tidygeocoder)
+library(here)
+library(mapbaltimore)   # map baltimore!
+theme_set(theme_void())   # for mapbaltimore
+library(getdata)
+
+map_area <- function(x, col) {
+  ggplot(data = x) +
+    geom_sf(aes(fill = .data[[col]])) +
+    geom_sf_label(aes(label = .data[[col]])) +
+    guides(fill = "none")
+}
+
+library(DT)
+```
+
+```{r preprocess data, include=FALSE}
+# Load drop boxes address information
+here()
+drop_boxes <- read_csv(here("Ballot_drop_box_locations_Baltimore_2024.csv"), locale=locale(encoding="latin1"), col_names = FALSE)
+
+# Remove weird character
+drop_boxes <- drop_boxes %>%
+  mutate(X1 = str_replace_all(X1, "Ê",""))
+
+# Separate into names and street addresses
+names_db <- drop_boxes[seq(1,nrow(drop_boxes),2),]
+addr_db <- drop_boxes[seq(2,nrow(drop_boxes),2),]
+
+db_df <- data.frame(cbind(names_db, addr_db))
+colnames(db_df) <- c("name","addr")
+
+# Convert addresses to lat/lon coordinates (this takes a minutes!)
+lat_longs <- db_df %>%
+  geocode(addr, method = 'osm', lat = latitude , long = longitude)
+
+# Check for mistakes and fix them
+# missing
+nan_inds <- which(is.na(lat_longs$latitude))
+lat_longs[nan_inds,]
+
+# Carver Vocational Tech
+lat_longs$latitude[nan_inds[1]] <- 39.30446
+lat_longs$longitude[nan_inds[1]] <- -76.65264
+
+# Farring Baybrook Rec Center
+lat_longs$latitude[nan_inds[2]] <- 39.22514
+lat_longs$longitude[nan_inds[2]] <- -76.59747
+
+# out of bounds
+oob <- which(lat_longs$latitude > 39.5 | lat_longs$latitude < 39)
+lat_longs[oob,]
+
+# Baltimore Museum of Art
+lat_longs$latitude[oob[1]] <- 39.32614
+lat_longs$longitude[oob[1]] <- -76.61950
+
+# League for people with disabilities
+lat_longs$latitude[oob[2]] <- 39.34480
+lat_longs$longitude[oob[2]] <- -76.59856
+
+# Check ranges now
+range(lat_longs$latitude)
+range(lat_longs$longitude)
+
+#saveRDS(lat_longs, "drop_box_lat_lon.RDS")
+
+```
+
+```{r load data}
+# Load clean data
+lat_longs <- readRDS("drop_box_lat_lon.RDS")
+```
+## Where can I drop off my Baltimore ballot?
+
+Election season is upon us already, and I was super pumped to participate in the new vote by mail program in Baltimore! As you probably already know, you can return your ballot by mail (just drop it in any USPS box), or if you'd like to save the City a little money, you can return your ballot to any of 33 drop boxes around Baltimore City. But where exactly are these boxes, you ask? The addresses are posted online, but as a newbie to this town, it wasn't immediately obvious which one was the closest to me...so I made a map. I hope it helps make your voting experience a little easier too. Just be sure to sign your ballot and return it by May 14, 2024, at 8p (but sooner is even better!).
+
+```{r build map}
+# Load data by "neighborhood" (or council district)
+area <- get_baltimore_area(
+  type = "neighborhood"
+)
+
+layer_streets <- maplayer::layer_location_data(
+  location = area,
+  data = streets,
+  color = "gray60"
+)
+
+layer_parks <- maplayer::layer_location_data(
+  location = area,
+  data = parks,
+  fill = "forestgreen",
+)
+
+background_layers <- list(layer_streets, layer_parks)
+
+
+```
+
+```{r}
+# convert coordinates to sf object
+ DT_sf = st_as_sf(lat_longs, coords = c("longitude", "latitude"), 
+                  crs = 4326, agr = "constant")
+
+# Add "number" column to use as label below
+DT_sf2 <- DT_sf %>%
+  mutate(number = 1:nrow(DT_sf))
+
+bmore_map +
+  layer_markers(lat_longs, color="red") +
+  layer_labelled(
+    data = DT_sf2,
+    geom = "sf_label",
+    mapping = aes(label = number),
+  )
+
+
+```
+
+```{r}
+# Make pretty table
+lat_longs_pretty <- lat_longs %>%
+  select(Name = name,
+         Address = addr) 
+datatable(lat_longs_pretty)
+
+```
