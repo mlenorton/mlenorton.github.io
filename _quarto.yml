@@ -10,7 +10,7 @@ website:
         text: Home
       - about.qmd   
       - analysis.qmd
-      - Map_ballot_drop_boxes.Rmd
+      - drop_boxes.qmd
 
 format:
   html:
