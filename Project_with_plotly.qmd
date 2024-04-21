@@ -1,0 +1,828 @@
+---
+title: "What is risk?"
+execute:
+  echo: false
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+bibliography: Risk_lit.bib
+csl: nature.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+library(tidyverse)
+library(plotly)
+```
+
+## 1. The set up
+
+Imagine that you go to your doctor. You'd like to know your (individual!) risk for some cancer. Let's talk about what this actually means. Your risk is defined as the probability that you will actually get that disease. The concept of "true risk" is debated because you either will develop cancer or you won't @Stern-2012 (see the "problem of the single-case" below). For now, we assume that this is not pre-determined. This estimate for your true risk is 1) practical because neither you, the best researchers, nor the smartest clinicians can be sure that you definitely will or will not develop cancer, and 2) may promote preventive behaviors, such as increased screenings or changes in modifiable risk factors (e.g. diet and exercise), that could help reduce your risk.
+
+Assuming that a true risk does exist, let's talk about your hypothetical probability of developing cancer. We'll let this little blue circle represent a healthy version of you:
+
+```{r plot you x1, fig.height=5, fig.width=5, fig.align="center"}
+# Turn off axes
+Noax <- list(    
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+# Set plot margin inputs
+m <- list(
+  l = 50,
+  r = 50,
+  b = 50,
+  t = 50,
+  pad = 4
+)
+
+data_you <- data.frame(x = 1, y = 1, z = "you")
+
+fig_you <- plot_ly(data_you, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers',
+        marker = list(size = 20, opacity = 0.7, color = 'rgb(66, 209, 209)'),
+        hoverinfo = 'text')   # TODO: don't show location
+
+fig_you <- fig_you %>% 
+   layout(title = '',
+          xaxis = Noax,
+          yaxis = Noax) %>%
+  config(displayModeBar = FALSE) 
+
+fig_you
+
+```
+
+My goal as a researcher is to estimate your (individual) probability of getting cancer. In a statistically-perfect, fictitious universe, I would study many (let's say 100) counterfactual versions of you. These counterfactuals would be identical to you in every way. Let me repeat: in each world, all known and unknown characteristics that make you *you*, would be replicated perfectly.
+
+```{r plot you x100}
+you_text_vec <- rep(c("you", "still you", "also you", "you again", "yep, it's you"), times = 20)
+data_you_100 <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = sample(you_text_vec,100))
+
+
+fig_you_100 <- plot_ly(data_you_100, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers',
+        marker = list(size = 20, opacity = 0.7, color = 'rgb(66, 209, 209)'),
+        hoverinfo = 'text')  
+
+fig_you_100 <- fig_you_100 %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_you_100
+
+```
+
+Then, in each world, I would monitor you to see if you develop cancer. For this demonstration, let's say you develop cancer in 12 out of 100 worlds. We would thus estimate that your probability of developing cancer is $\frac{12}{100} * 100\% = 12\%$.
+
+```{r plot you x100 risk}
+# Set up vector for diseased individuals to be colored differently
+abs_risk_you <- 12   # try 12% 
+set.seed(10)
+diseased_inds <- sample(1:100, abs_risk_you, replace = FALSE)
+diseased_vec <- vector(mode = "character", length = 100)
+diseased_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+diseased_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+
+# Set up text vector
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+
+data_you_100_risk <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_you_100_risk <- plot_ly(data_you_100_risk, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, opacity = 0.7, color = diseased_vec),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_you_100_risk <- fig_you_100_risk %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_you_100_risk
+
+
+```
+
+Let's stop right there. First of all - why do we get different results in different worlds? As an empiricist, I find this apparent lack of reproducibility deeply unintuitive, even troubling. Secondly, did you notice that I estimated a probability as an observed proportion - why did I do that? Thirdly, once we have an estimate for your probability of disease, what does it even mean? Finally, in the real world, we can't study 100 counterfactual versions of you, so what do we do? This discussion aims to address each of these points (at somewhat inconsistent levels of depth). Peruse various sections depending on your interests.
+
+## 2. What is randomness and where does it come from?
+
+True randomness is the absolute lack of pattern or predictability of events, and it is arguably an intrinsic aspect of natural systems @Tsonis-2024:
+
+-   *Quantum mechanics* states that we cannot precisely know both the position and velocity of subatomic particles, and by measuring either, we increase the uncertainty around the other quantity. Practically, this means that we cannot predict radioactive decay times for individual atoms, Brownian motion, heat transfer patterns, or cosmic radiation, to name a few. Thus, quantum mechanics serves as an inherent source of randomness in the universe.
+
+Alternatively, apparent randomness can be debunked by taking a closer look at the system, upon which order, pattern, and/or predictability could be discerned:
+
+-   *Chaos* is unpredictability of a system arising due to high sensitivity to initial conditions. Given the slightest change in subatomic or atomic factors, we can see wide variations in outcomes (i.e. the butterfly effect).
+
+-   *Stochasticity* is the idea that a very large number (i.e. an uncountable number) of external agents interact, creating an extremely complex web of factors that affect an outcome.
+
+Apparently random processes are extremely complex. Sometimes we approximate them with true randomness to simplify our model and minimize required computational power. For example, genetic mutations and environmental exposures (e.g. air pollution, smoking, diet, exercise, UV exposure, etc.) may not be truly random @Monroe-2022, but we can simplify our calculations dramatically by selecting only the most important risk factors and grouping the others into a random error term.
+
+## 3. Why do we use a proportion to estimate a probability?
+
+The field of statistics gives us several tools to estimate a parameter, which is exactly what our probability is here. Let's begin by re-stating our problem mathematically. We will consider your health status (yes, yours!) as a random variable since we don't know your outcome yet. Your possible outcomes are healthy (denoted as a $0$) and diseased (denoted as a $1$). Thus, we aim to estimate your probability of being diseased, $p$, defined as $p = P(X = 1)$, where $P$ is a probability function. Thus, since we have two possible outcomes, and one probability parameter, we will assume that $X$ follows a Bernoulli distribution with probability p:
+
+$$X \sim Ber(p)$$
+
+### A. Method of moments estimation
+
+The method of moments estimation technique is based on the result from the Weak Law of Large Numbers (WLLN), which says that the empirical mean $\bar{X}$ approaches the true mean of a random variable \mathop{\mathbb{E}}\[X\] as the number of observations $n$ gets large. More formally, we state the WLLN as follows:
+
+$$
+\bar{X_n} \to^p \mathbb{E}[X]
+$$ where $\to^p$ indicates convergence in probability.
+
+Thus, we can substitute the observed empirical mean $\bar{x}$ for its expectation, and solve for our parameter $p$ as follows:
+
+$$
+\begin{align}
+\mathop{\mathbb{E}}[X] &= p \\
+\bar{X} &\approx p \\  
+\hat{p} &= \frac{1}{n}\sum_{i=1}^{n}X_i
+\end{align}
+$$
+
+### B. Maximum likelihood estimation
+
+An alternative approach, that has many appealing properties, is known as maximum likelihood estimation, or MLE. This method reframes the problem in such as way that we can think about finding the parameter $p$ that makes our observations $x$ most likely. For a $Ber(p)$ random variable, the likelihood function, which is the same as the joint probability mass function, is
+
+$$
+\begin{align}
+{\cal{L}}{(p|X)} &= \Pi_{i=1}^n P(X_i|p)  \\
+&= \Pi_{i=1}^{n} p^{X_i}(1-p)^{1 - X_i} 
+\end{align}
+$$
+
+We will maximize the log likelihood (since it is easier to work with), by taking its derivative, setting it equal to zero, and solving for $p$:
+
+$$
+\begin{align}
+log({\cal{L}}) &\propto \sum_{i=1}^{n} X_i log(p) + (1-X_i)log(1-p) \\
+\frac{dlog{\cal{L}}}{dp} &\propto \frac{\sum_{i=1}^{n}{X_i}}{p} - \frac{n-\sum_{i=1}^{n}{X_i}}{1-p}  \\
+0 &= \frac{\sum_{i=1}^{n}{X_i}}{p} - \frac{n-\sum_{i=1}^{n}{X_i}}{1-p}  \\
+\hat{p} &= \frac{1}{n}\sum_{i=1}^{n}{X_i}
+\end{align}
+$$
+
+In summary, both methods give the same estimate for $p$ which is equal to the total number of successes (or in this case, the number of times you develop the disease: 12) divided by the total number of trials (or in this case, the total number of fictitious worlds where we followed a counterfactual version of you: n = 100). Thus, we arrive at our previous estimate that you have a 12% probability of getting cancer.
+
+## 4. What is a probability anyway?
+
+Now that I've told you that your true risk of developing cancer is 12% - so what?? What are some ways you can interpret that statement?
+
+Intuitively, many of us think about probability as the chance or likelihood of something happening. More rigorously, recall that a probability measure must meet the three axioms stated by Kolmogorov (1933). Simply put, they say that 1) the total probability of all possible outcomes must equal 1, 2) for any possible outcome, its probability must be between 0 and 1 (i.e. no negative probabilities), and 3) that the probability of mutually exclusive outcomes is equal to the sum of the probabilities of each outcome. Mathematically, we write:
+
+For probability triple, $(\Omega, \cal{F}, P)$, where $\Omega$ = sample space, $\cal{F}$ = $\sigma$-algebra, and $P$ = probability measure, $$P(\Omega) = 1, $$ $$P(p) \ge 0 \text{ for any } p \in \Omega,$$ $$P(\cup_{i} p_i) = \Sigma_{i} p_i \text{ for countable disjoint } p_i.$$
+
+There are at least six distinct ways to interpret probabilities @Hajek-2019, but I will highlight the three most common. I won't go into each thoroughly, but I want to give a sense for the range of what a probability might mean. Perhaps the similarities and differences between the interpretations will help us understand the concept of probability more deeply. I think it's important for the person communicating the probability as well as the one receiving it to be aware of the potential ways that the information may be interpreted.
+
+### A. Classical probability
+
+*Core idea*: Probability is determined *a priori* by identifying all possible outcomes and assigning each one an equal chance.
+
+*Example*: Assume a coin is fair. Then since there are two sides (heads and tails), we attribute equal probability to each: $P(heads) = P(tails) = 0.5$.
+
+*Breakdown*: Large (uncountable) probability spaces, spaces with unknown/unaccounted outcomes, unequal chances for different events (e.g. weighted dice, unfair coin)
+
+![Heads and tails of a U.S. quarter](heads_tails.png){width="40%"}
+
+### B. Frequency interpretations
+
+*Core idea*: Frequentists assume that the long-run frequency of events is fixed, objective, and intrinsically tied to the probability of that event. Thus, instead of considering all of the possible outcomes (as in classical probability), we will use the observed outcomes and compare this to the expected results assuming a null hypothesis @Hajek-2019.
+
+*Example*: Let's assess whether a coin is fair by estimating the probability of a coin landing on heads. We would flip the coin many times and estimate the probability by counting the number of heads and dividing it by the number of total trials. If this is (sufficiently) close to 0.5, we would assume this is a fair coin. Experiments with a large number of repeated trials or large sample sizes of independent events are good applications for frequentists statistics.
+
+*Breakdown*: Suppose we only observed a few of the trials above. If we observed up to 10 trials (first row below) we would be tempted to conclude that your cancer risk is 0/10 = 0%. However, if we observed 11 trials, we would conclude that your risk is 1/11 = 9.1%. With 50 trials, we would estimate that your cancer risk is 4/50 = 8%. But none of these is correct. We know theoretically that a sequence of unlikely events is possible, but frequentists assume that the probability that corresponds most closely with the observed data, regardless of prior knowledge, is the best estimate. As the number of trials increases, this becomes less of a problem, but few real-life events are repeatable an arbitrary number of times, and many are downright unrepeatable (e.g. the Big Bang, volcanic eruption/earthquake/natural disaster, 2024 presidential election, etc.) leaving us with a gap in how to reconcile the true probability of the event. This is known as the "problem of the single-case." This also becomes much more complex in the event of dependent events.
+
+```{r}
+# Recreate plot above but with limited axes
+fig_you_100_risk_cropped <- fig_you_100_risk %>%
+  layout(yaxis = list(range = c(5.5,10.5)))
+
+fig_you_100_risk_cropped
+
+```
+
+### C. Subjective interpretation (aka Bayesian)
+
+*Core idea*: A probability represents someone's degree of belief, confidence, or credence. This "someone" is a rational and logically consistent "suitable agent" who follows the axioms of probability. However, these credences are inherently subjective (hence the name). Your level of credence about an event can be estimated by what you would consider a "fair bet" (i.e. putting your money where you mouth is): "Your degree of belief in E is p iff p units of utility is the price at which you would buy or sell a bet that pays 1 unit of utility if E, 0 if not E" @Hajek-2019. In other words, you are indifferent to placing a bet $p$ on $E$ as you are to placing $1-p$ on $\neg E$. In the statistical framework, someone's belief is based on prior knowledge - summarized as a prior probability with a selected distribution and parameter(s) - which is combined with observed data to obtain a posterior, from which conclusions are drawn @Bernardo-Smith-1994.
+
+$\text{Bayes Rule:}$ $$
+P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}
+$$ where $H$ is the hypothesis, $P(H)$ is the estimate of the probability of the hypothesis (i.e. "prior" probability), $E$ is the evidence (i.e. data), $P(E)$ is the marginal likelihood of the data, $P(E|H)$ is the "likelihood" of the data given the fixed hypothesis, and $P(H|E)$ is the probability of the hypothesis given the fixed data (i.e. "posterior" probability).
+
+*Example*: We could evaluate the hypothesis that a coin is fair compared to the hypothesis that it is not by calculating the posterior under each prior. First we might assume that the coin flip is fair (i.e. the flip is distributed Bernoulli(0.5)). Then we flip the coin many times and count the number of heads. We then estimate the likelihood of this event given the fixed hypothesis that the coin is fair. Finally, we multiply the likelihood and the prior to generate a posterior probability that the coin is fair given the data. It is common to compare two hypotheses, so we may also repeat the process assuming another parameter for the prior probability. Then we could compare the posterior probabilities for these two hypotheses and see which is more probable.
+
+*Breakdown*: Selecting a prior is subjective and there are few well-defined methods for choosing one @Hackenberger-2019. Sometimes there is minimal prior knowledge, in which case a uniform prior may be used; this is the same as doing a frequentist analysis.
+
+Going back to our cancer example, we employed a frequentist approach to estimate your risk of cancer (in some fictitious universe). If we had *a priori* knowledge about your risk of cancer, e.g. given your family history, age, or other factors, we could update our probability estimate by combining the observed data and this prior knowledge in a Bayesian approach.
+
+## 5. How do we actually estimate your probability of disease?
+
+In reality, of course, we can't study 100 counterfactual versions of you. We have to make an estimate with what's available to us now. Since you are a human, let's estimate the risk within a group of 100 randomly sampled humans:
+
+```{r plot 100 other people}
+# simulate similar shades of blue/green
+trip_R <- 66
+trip_G <- seq(66,209,1)
+trip_B <- 209
+
+not_you_text_vec <- rep(c("not you", "still not you", "also not you", "somebody else", "nope, not you"), times = 20)
+data_people_100 <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = sample(not_you_text_vec,100))
+
+shades_of_blue <- sapply(1:length(trip_G), function(i) paste0("rgb(", trip_R, ",", trip_G[i],",", trip_B, ")"))
+
+shades_of_blue_rand100 <- sample(shades_of_blue, 100, replace = TRUE)
+
+fig_people_100 <- plot_ly(data_people_100, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers',
+        marker = list(size = 20, opacity = 0.7, color = shades_of_blue_rand100),
+        hoverinfo = 'text')   
+
+fig_people_100 <- fig_people_100 %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_people_100
+
+```
+
+After following these 100 individuals, we find that 11 people get cancer. Risk (or cumulative incidence) is estimated as the number of incident (i.e. new) cases within a given time divided by the number of individuals in the study population (sounds familiar, eh?). Thus, we estimate an 11% risk within this study population.
+
+```{r plot risk of 100 other people}
+
+# Set up vector for diseased individuals
+abs_risk_people <- 11   # try 11% 
+set.seed(102)
+diseased_inds <- sample(1:100, abs_risk_people, replace = FALSE)
+shades_of_blue_rand100[diseased_inds] <- 'rgb(255, 65, 54)'   # red
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+
+data_people_100_risk <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_people_100_risk <- plot_ly(data_people_100_risk, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, opacity = 0.7, color = shades_of_blue_rand100),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_people_100_risk <- fig_people_100_risk %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_people_100_risk
+
+```
+
+Then, assuming that all individuals in this study population are independent and identically distributed\*, using the math above, we assign each individual within the target population (which includes you!) the same probability of disease. \* The assumption of the participants being identically distributed is critical, and impossible to test. Practically, researchers and clinicians attempt to group individuals with similar risk factors into the same group to estimate risk, but defining which population is most relevant to you is challenging if not impossible.
+
+## 6. The reference class problem
+
+For demonstration purposes, let's assume the same overall risk of 11% in the total population. Now consider the subset of this population that are men (i.e. the left half of the population): 8/50 men get sick, so their risk is 16%. Women (on the right), however, get sick at a rate of 3/50 = 6%. We can subdivide our population further by age, or any other risk factors (or any combination of these characteristics), and we estimate different risks for each subpopulation. Taking this to an extreme, we see that a young man has a 20% risk, and an older man has a 12% risk; a young woman has an 8% risk, and an older woman has a 4% risk. So which population - and consequently which risk estimate - is most relevant for a given individual?
+
+```{r}
+# Demonstrate reference class problem visually
+fig_people_100_risk_annotated <- fig_people_100_risk %>%
+  add_annotations(
+    x= 3,
+    y= 10.85,
+    xref = "x",
+    yref = "y",
+    text = "Men: 16%",
+    showarrow = F,
+    font = list(color = 'blue',
+                family = 'sans serif',
+                size = 24)) %>%
+  add_annotations(
+    x= 8,
+    y= 10.85,
+    xref = "x",
+    yref = "y",
+    text = "Women: 6%",
+    showarrow = F,
+    font = list(color = 'pink',
+                family = 'sans serif',
+                size = 24)) %>%
+  add_annotations(
+    x= 0.25,
+    y= 8,
+    xref = "x",
+    yref = "y",
+    text = "≤40 years old: \n14%",
+    showarrow = F,
+    textangle = -90,
+    font = list(color = 'black',
+                family = 'sans serif',
+                size = 24)) %>%
+  add_annotations(
+    x= 0.25,
+    y= 3,
+    xref = "x",
+    yref = "y",
+    text = ">40 years old: \n8%",
+    showarrow = F,
+    textangle = -90,
+    font = list(color = 'darkgrey',
+                family = 'sans serif',
+                size = 24)) 
+
+fig_people_100_risk_annotated <- layout(fig_people_100_risk_annotated,
+             shapes = list(
+               list(type = "rect",
+                    line = list(color = "blue"), opacity = 1,
+                    x0 = 0.75, x1 = 5.4, xref = "x",
+                    y0 = 0.25, y1 = 11.5, yref = "y"),
+               list(type = "rect",
+                 line = list(color = "pink"), opacity = 1,
+                 x0 = 5.6, x1 = 10.25, xref = "x",
+                 y0 = 0.25, y1 = 11.5, yref = "y"),
+               list(type = "rect",
+                 line = list(color = "black"), opacity = 1,
+                 x0 = -0.5, x1 = 10.5, xref = "x",
+                 y0 = 5.6, y1 = 10.5, yref = "y"),
+               list(type = "rect",
+                 line = list(color = "darkgrey"), opacity = 1,
+                 x0 = -0.5, x1 = 10.5, xref = "x",
+                 y0 = 0.5, y1 = 5.4, yref = "y")))
+
+fig_people_100_risk_annotated
+
+```
+
+This predicament of identifying the appropriate population for which to estimate risk is known as the "reference class problem." This problem was identified by John Venn in 1876: "every single thing or event has an indefinite number of properties or attributes observable in it, and might therefore be considered as belonging to an indefinite number of different classes of things" @Venn-1876. Thus, Stern (2012) @Stern-2012 argues that there is no such thing as unconditional or individual risk. The risk factors included in the model that we select determine the population classes, and thus the risk estimates for each class. Even for well-calibrated models, when we compare two models, the risk estimates associated with any one individual can vary substantially depending on which reference class an individual is assigned to @Lemeshow-1995.
+
+## 7. Limitations
+
+The goal of precision medicine is to make the reference class as small as possible so that there is less variability within that group, and better estimates of risk are assigned to each individual @Kent-2018. This is a tricky problem and is discussed thoroughly by Kent et al. (2018). Most importantly, risk should be clearly communicated to doctors and patients that risk is estimated using a specific model, and "people with X, Y, and Z risk factors have a W% risk for disease Q."
+
+In my research, however, we skirt the individual risk issue by making predictions at the population-level. We can feel confident making these predictions when the model is shown to perform well on a given population (i.e. it is "well-calibrated"). Thus, our models can help inform how cancer screening guidelines should set to screen the top X percentage of the population at highest risk, or other allocations of resources.
+
+Additional limitations include the problem of adjusting someone's risk if their covariates change over time - it is currently unknown how this will affect risk since most models only include covariates measured at baseline. Issues surrounding generalizability or transportability to other populations for groups that are under-represented in study populations is common.
+
+```{r eval=FALSE}
+# ## ADD: what is a neglibible probability (see Skip Garibaldi - ~min 18)
+# 
+# # Central Limit Theorem
+# What is the Central Limit Theorem, or CLT (for short)? Simply stated, the CLT says that, if we repeat an experiment many times, the average (or proportion in our case) from our sample will be normally distributed around the true population mean, and the standard deviation of this curve will decrease as our sample size increases at a predictable rate (i.e. sample s.d. = true s.d./sqrt(n)). We can see this stated mathematically as follows:  
+# $$
+# \sqrt{n}(\bar{X_n} - \mu) \to^D \mathcal{N}(0,\sigma^2)
+# $$
+# where $n$ is our sample size, $\bar{X_n}$ is our sample average, $\mu = \mathbb{E}[X]$, i.e. the true value, $\to^D$ indicates convergence in distribution, $\mathcal{N}$ indicates a normal distribution, and $\sigma^2 = var(X) < \infty$. Amazingly, this holds regardless of the distribution that the data are drawn from!
+# 
+# We can explore this theoretical behavior using simulations. In our case, let us simulate the risk associated with a certain disease. Thus, we will denote healthy individuals with a 0 and sick individuals with a 1, and the true probability of someone being sick $p$ will determine how many sick people we see in our simulation. Mathematically, we can describe our population as having a Bernoulli distribution with probability $p$ of being sick. Use the sliders below to select the sample size ($n$) and the true probability of disease ($p$).
+```
+
+```{r example dots, eval=FALSE}
+# Select sample size (n) and probability of disease (p)
+p_range = data.frame(seq(0,1,0.1))
+n_range = data.frame(seq(1,100,10))
+colnames(p_range) <- "x"
+colnames(n_range) <- "x"
+
+
+
+
+df <- data.frame(x = c("1", "2", "3", "4", "5"), 
+                 y = c("1", "1", "1", "1", "1")) 
+
+# create steps for slider
+all_p <- list()
+for (i in 1:length(p_range[,])) { 
+  all_p[[i]] <- list(method = "restyle",
+                       label = p_range$x[i])
+}
+
+all_n <- list()
+for (i in 1:length(n_range[,])) {  
+  all_n[[i]] <- list(method = "restyle",
+                       label = n_range$x[i]) 
+} 
+
+
+steps <- list(
+  list(args = list("marker.color", "red"), 
+                    label = "Red", 
+                    method = "restyle", 
+                    value = "1"
+                    ),
+  list(args = list("marker.color", "green"), 
+                    label = "Green", 
+                    method = "restyle", 
+                    value = "2"
+                    ),
+  list(args = list("marker.color", "blue"), 
+                    label = "Blue", 
+                    method = "restyle", 
+                    value = "3"
+                    )
+  )
+
+fig<- df 
+fig <- fig %>% plot_ly(x = ~x, y = ~y,
+          mode = "markers", 
+          marker = list(size = 20,
+                        color = 'green'), 
+          type = "scatter") 
+
+fig <- fig %>% layout(title = "Basic Slider",
+         sliders = list(
+           list(
+             active = 1, 
+             currentvalue = list(prefix = "Color: "), 
+             pad = list(t = 60), 
+             steps = steps))) 
+
+fig
+
+
+```
+
+```{r example sine, include=FALSE}
+
+# For now, try to keep n the same (10), and vary p (0 to 1)
+
+x <- seq(0,10, length.out = 10)
+
+# create data
+aval <- list()
+for(step in 1:11){
+  aval[[step]] <-list(visible = FALSE,
+                      name = paste0('v = ', step),
+                      x=x,
+                      y=sin(step*x))
+}
+aval[3][[1]]$visible = TRUE
+
+# create steps and plot all traces
+steps <- list()
+fig <- plot_ly()
+for (i in 1:11) {
+ fig <- add_lines(fig, x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
+                 name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
+                 line=list(color='00CED1'), showlegend = FALSE)
+
+  step <- list(args = list('visible', rep(FALSE, length(aval))),
+               method = 'restyle')
+  step$args[[2]][i] = TRUE  
+  steps[[i]] = step 
+}  
+
+# add slider control to plot
+fig <- fig %>%
+  layout(sliders = list(list(active = 3,
+                             currentvalue = list(prefix = "Frequency: "),
+                             steps = steps)))
+
+fig
+
+
+```
+
+```{r, eval=FALSE}
+# For now, try to vary n (1:10), and keep p same (0.5)
+# n is the new x, p is the new y
+# ACTUALLY, n should be a drop down! And p can be a slider...? TODO: START HERE!
+
+
+# dropdown
+sample_n = data.frame(type = c(2,5,10,20,50))
+
+all_buttons <- list()
+for (i in 1:dim(sample_n)[1]) { 
+  all_buttons[[i]] <- list(method = "restyle",
+                           label = sample_n$type[i])
+}
+
+# TODO: START HERE...change n from a slider to a drop-down input...
+# TODO: convert p from static to slider
+
+#n <- seq(1,11,1)   # length = 11
+p <- 0.5  
+sick_num <- sapply(1:dim(sample_n)[1], function(i) sum(rbernoulli(sample_n$type[i],p)))
+
+# annotations
+annot <- list(x = 0, y=1, text = "Sample Size", yanchor = 'bottom', 
+              xref = 'paper', xanchor = 'right',
+              showarrow = FALSE)
+
+# create data
+aval <- list()
+for(step in 1:dim(sample_n)[1]){
+  aval[[step]] <-list(visible = FALSE,
+                      name = paste0('n = ', sample_n$type[step]),
+                      x=seq(1,sample_n$type[step],1),    # TODO: make them evenly spaced - may want to adjust below
+                      y=1,
+                      color=sample(c(rep('rgb(255, 65, 54)', times = sick_num[step]), rep('rgb(66, 209, 209)', times = sample_n$type[step]-sick_num[step]))))  # TODO: convert to random sample based on p
+}
+aval[3][[1]]$visible = TRUE   # change n = 6 to visible
+
+# create steps and plot all traces
+steps <- list()
+fig <- plot_ly()
+for (i in 1:length(sample_n)) {
+ fig <- add_markers(fig, x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
+                 name = aval[i][[1]]$name, type = 'scatter', mode = 'markers',
+        marker = list(size = 20, opacity = 0.7, color = aval[i][[1]]$color)) %>%
+        layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax)
+                 
+  step <- list(args = list('visible', rep(FALSE, length(aval))),
+               method = 'restyle')
+  step$args[[2]][i] = TRUE  
+  steps[[i]] = step 
+}  
+
+# add slider control to plot
+fig <- fig %>%
+  layout(annotations = annot,
+         updatemenus = list(list(active = 2, x = 0, y = 1, 
+                                              buttons=all_buttons)))
+#  layout(sliders = list(list(active = 3,
+ #                            currentvalue = list(prefix = "Frequency: "),
+  #                           steps = steps)))
+
+fig
+
+
+```
+
+```{r CLT, eval=FALSE}
+# We can see that the distribution of $\bar{X_n}$ approaches a normal distribution centered at the true probability $\mu$, and the variance decreases as $n$ (or the number of experiments) increases. This is exactly what the CLT promises! 
+# 
+# *NOTE: should we be using consistent notation ($\bar{X_n}$) or explaining why a proportion is an average??*
+  
+# TODO: trying to get animation working!
+# Set up plotly graphic
+# sliders
+iter <- 20000
+mu_range = data.frame(seq(0,1,0.1))
+n_range = data.frame(seq(1,100,10))
+colnames(mu_range) <- "x"
+colnames(n_range) <- "x"
+
+
+## START HERE!
+all_mu <- list()
+for (i in 1:length(mu_range[,])) { 
+  all_mu[[i]] <- list(method = "relayout",
+                       args = list(list(geo.projection.rotation.lat = lat_range$x[i])),
+                       label = lat_range$x[i])
+}
+
+all_lon <- list()
+for (i in 1:length(lon_range[,])) {  
+  all_lon[[i]] <- list(method = "relayout", 
+                       args = list(list(geo.projection.rotation.lon = lon_range$x[i])),
+                       label = lon_range$x[i]) 
+} 
+
+iter <- 20000
+n <- 20
+mu <- 0.5
+
+Xn_bar <- sapply(1:iter, function(i) mean(rbernoulli(n, mu)))
+
+clt_df <-  data.frame(prob = Xn_bar, exp = 1:n, true_prob = mu) 
+ 
+# Histogram to demo CLT
+prob_mean <- round(mean(clt_df$prob), 3)  
+prob_var <- round(var(clt_df$prob), 4)
+
+clt_df %>%
+  ggplot(aes(prob)) +
+  geom_histogram() +   # TODO: don't let it be so gappy
+  theme_minimal() +
+  labs(x = "Estimated probability p", y = "Count", title = "Probabilty estimates converge to normal distribution", subtitle = paste0("mean = ", prob_mean, " \nvar = ", prob_var)) +
+  xlim(0,1) 
+
+
+clt_df %>%
+  plot_ly(x=~prob,
+          type = 'histogram') %>%
+  layout(xaxis = list(range = c(0,1)))
+
+
+```
+
+```{r eval=FALSE}
+## Absolute risk
+library(iCARE)
+library(tidyverse)
+library(here)
+library(data.table)
+library(RColorBrewer)
+library(boxr)
+set.seed(50)
+
+
+
+
+# 1. Load mean (0), variance (1), and odds ratio for Mavaddat BC PRS (313 SNPs) for different ancestries (calculated by Martina in 1000G)
+
+bc_OR_white <- as.numeric(0.4762342)
+attr(bc_OR_white, "names") <- "PRS"
+
+
+# 2. Simulate PRS scores (all are assumed to be ~ N(0,1))
+n_sim <- 10000
+sim_ref_dat <- rnorm(n_sim)
+sim_ref_dat <- as.data.frame(sim_ref_dat)
+names(sim_ref_dat) <- "PRS"
+PRS_no_famhist <- sim_ref_dat
+
+# 3. Calculate competing risk from CDC Wonder data
+competing_risk_data <- read_csv(here("data", "raw", "Underlying_Cause_of_Death_2011-2020_all_races.csv"))
+
+CDC_races <- unique(competing_risk_data$Race)
+
+competing_risk_white <- competing_risk_data %>%
+  filter(Race == "White",
+         Gender == "Female",
+         `Hispanic Origin`=="Not Hispanic or Latino") %>%
+  mutate(Incidence = Deaths/as.numeric(Population),
+         Age = as.numeric(`Single-Year Ages Code`)) %>%
+  select(ages = Age, 
+         rate = Incidence) %>%
+  filter(ages < 85)
+
+competing_risk_white <- as.matrix(competing_risk_white)
+
+# 4. Get BC incidence from Box folder (somewhat different than from NCI SEER :()
+# BC: White women >=50 yrs old
+box_auth()
+box_load(1158486615036)
+
+# BC Incidence rates - white  
+bc_inc_white <- white.female.ge50.breast_objects$incidence_rates %>%
+  filter(ages < 85)
+
+# From Box folder, estimate proportion of individuals with history of BC 
+n_obs <- length(white.female.ge50.breast_objects[["reference_data"]][["famhist"]])    # 271
+famhist_inds <- which(white.female.ge50.breast_objects[["reference_data"]][["famhist"]]==1)
+n_famhist <- length(famhist_inds)   # 55 --> 20% have a family history of BC
+
+ratio_famhist <- n_famhist/n_obs
+n_sim_famhist <- floor(ratio_famhist*n_sim)
+
+# Modify PRS to include family history
+sim_famhist_inds <- sample(1:n_sim, n_sim_famhist)
+PRS_famhist <- sim_ref_dat
+set.seed(50); PRS_famhist$PRS[sim_famhist_inds] <- rnorm(n_sim_famhist, mean = 0 + 0.5*1, sd = 1)
+
+
+# 5. Define Model formula: PRS only
+my_bc_model_formula_PRS <- as.formula("diagnosis ~ PRS")
+
+
+# 6. Set covariate info for PRS only:
+my_bc_model_cov_info <- list()
+my_bc_model_cov_info[[1]] <- bc_model_cov_info[[1]]
+my_bc_model_cov_info[[1]]$name <- "PRS"
+
+
+
+# 7a. Calculate absolute risk (PRS only model)
+# 30 year window from age 50 to age 80
+# White
+abs_risk_white_PRS_baseline <- computeAbsoluteRisk(model.formula = my_bc_model_formula_PRS,          
+                                  model.cov.info = my_bc_model_cov_info,                    # bc_model_cov_info
+                                  model.log.RR = bc_OR_white,                               # bc_model_log_or   
+                                  model.ref.dataset = sim_ref_dat,                          # ref_cov_dat
+                                  model.ref.dataset.weights = NULL,     
+                                  model.disease.incidence.rates = bc_inc_white,             # bc_inc
+                                  model.competing.incidence.rates = as.data.frame(competing_risk_white),   # mort_inc
+                                  apply.age.start = 50,
+                                  apply.age.interval.length = 30,
+                                  apply.cov.profile = my_new_cov_prof,                      # new_cov_prof 
+                                  return.refs.risk = TRUE)
+
+# Plot results
+hist(abs_risk_white_PRS_baseline$refs.risk)
+
+# 7b. Adding family history
+# 30 year window from age 50 to age 80
+# White
+abs_risk_white_PRS_fam_hist <- computeAbsoluteRisk(model.formula = my_bc_model_formula_PRS,          
+                                  model.cov.info = my_bc_model_cov_info,                    # bc_model_cov_info
+                                  model.log.RR = bc_OR_white,                               # bc_model_log_or   
+                                  model.ref.dataset = PRS_famhist,                          # ref_cov_dat
+                                  model.ref.dataset.weights = NULL,     
+                                  model.disease.incidence.rates = bc_inc_white,             # bc_inc
+                                  model.competing.incidence.rates = as.data.frame(competing_risk_white),   # mort_inc
+                                  apply.age.start = 50,
+                                  apply.age.interval.length = 30,
+                                  apply.cov.profile = my_new_cov_prof,                      # new_cov_prof 
+                                  return.refs.risk = TRUE)
+
+# Plot results
+hist(abs_risk_white_PRS_fam_hist$refs.risk)
+
+
+# Compare BC incidence rates to abs risk prediction...?
+cum_bc_inc_white <- bc_inc_white %>%
+  filter(ages > 49 & ages < 81) %>%
+  select(rate) %>%
+  sum()   # 0.12311
+
+# Mean/median risk with no family history
+mean(abs_risk_white_PRS_baseline$refs.risk)
+median(abs_risk_white_PRS_baseline$refs.risk)
+
+# Mean/median risk if we include family history
+mean(abs_risk_white_PRS_fam_hist$refs.risk)     # mean increases ever so slightly
+median(abs_risk_white_PRS_fam_hist$refs.risk)   # median decreases ever so slightly
+
+
+
+
+
+# 7c. Increase log OR (originally log RR for PRS = 0.4762342 --> RR = 1.61) --> try doubling this!
+bc_OR_white_2x <- bc_OR_white
+bc_OR_white_2x[1] <- log(2*1.61)
+
+abs_risk_white_PRS_highRR <- computeAbsoluteRisk(model.formula = my_bc_model_formula_PRS,          
+                                  model.cov.info = my_bc_model_cov_info,                    # bc_model_cov_info
+                                  model.log.RR = bc_OR_white_2x,                            # bc_model_log_or   
+                                  model.ref.dataset = sim_ref_dat,                          # ref_cov_dat
+                                  model.ref.dataset.weights = NULL,     
+                                  model.disease.incidence.rates = bc_inc_white,             # bc_inc
+                                  model.competing.incidence.rates = as.data.frame(competing_risk_white),   # mort_inc
+                                  apply.age.start = 50,
+                                  apply.age.interval.length = 30,
+                                  apply.cov.profile = my_new_cov_prof,                      # new_cov_prof 
+                                  return.refs.risk = TRUE)
+
+# Plot results
+hist(abs_risk_white_PRS_highRR$refs.risk)
+
+mean(abs_risk_white_PRS_highRR$refs.risk) # mean increases
+median(abs_risk_white_PRS_highRR$refs.risk)  # median decreases
+
+
+# 7d. Change BC incidence rate --> try doubling this!
+bc_inc_white_2x <- bc_inc_white
+bc_inc_white_2x$rate <- bc_inc_white$rate*2
+
+abs_risk_white_PRS_highInc <- computeAbsoluteRisk(model.formula = my_bc_model_formula_PRS,          
+                                  model.cov.info = my_bc_model_cov_info,                    # bc_model_cov_info
+                                  model.log.RR = bc_OR_white,                          # bc_model_log_or   
+                                  model.ref.dataset = sim_ref_dat,                          # ref_cov_dat
+                                  model.ref.dataset.weights = NULL,     
+                                  model.disease.incidence.rates = bc_inc_white_2x,             # bc_inc
+                                  model.competing.incidence.rates = as.data.frame(competing_risk_white),   # mort_inc
+                                  apply.age.start = 50,
+                                  apply.age.interval.length = 30,
+                                  apply.cov.profile = my_new_cov_prof,                      # new_cov_prof 
+                                  return.refs.risk = TRUE)
+
+# Plot results
+hist(abs_risk_white_PRS_highInc$refs.risk)
+
+mean(abs_risk_white_PRS_highInc$refs.risk) # mean almost ~doubles (~1.94)
+median(abs_risk_white_PRS_highInc$refs.risk)  # median almost ~doubles (~1.91)
+
+
+
+# 7e. Change competing mortality risk --> try doubling this!
+competing_risk_white_2x <- competing_risk_white
+competing_risk_white_2x$rate <- competing_risk_white_2x$rate*2
+
+abs_risk_white_PRS_highCompMort <- computeAbsoluteRisk(model.formula = my_bc_model_formula_PRS,          
+                                  model.cov.info = my_bc_model_cov_info,                    # bc_model_cov_info
+                                  model.log.RR = bc_OR_white,                          # bc_model_log_or   
+                                  model.ref.dataset = sim_ref_dat,                          # ref_cov_dat
+                                  model.ref.dataset.weights = NULL,     
+                                  model.disease.incidence.rates = bc_inc_white,             # bc_inc
+                                  model.competing.incidence.rates = as.data.frame(competing_risk_white_2x),   # mort_inc
+                                  apply.age.start = 50,
+                                  apply.age.interval.length = 30,
+                                  apply.cov.profile = my_new_cov_prof,                      # new_cov_prof 
+                                  return.refs.risk = TRUE)
+
+# Plot results
+hist(abs_risk_white_PRS_highCompMort$refs.risk)
+
+mean(abs_risk_white_PRS_highCompMort$refs.risk) # mean decreases a bit
+median(abs_risk_white_PRS_highCompMort$refs.risk)  # median decreases a bit
+
+# TODO: try doubling and halving some of the above options, then plot geom_density lines on one plot for comparison
+
+
+```
