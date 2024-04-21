@@ -84,9 +84,10 @@ range(lat_longs$longitude)
 ```{r load data}
 # Load clean data
 lat_longs <- readRDS("drop_box_lat_lon.RDS")
-
 ```
+## Where can I drop by ballot?
 
+Election season is upon us already, and I was super pumped to participate in the new vote by mail program in Baltimore! As you probably already know, you can return your ballot by mail (just drop it in any USPS box), or if you'd like to save the City a little money, you can return your ballot to any of 33 drop boxes around Baltimore City. But where exactly are these boxes, you ask? The addresses are posted online, but as a newbie to this town, it wasn't immediately obvious which one was the closest to me...so I made a map. I hope it helps make your voting experience a little easier too.
 
 ```{r build map}
 # Load data by "neighborhood" (or council district)
