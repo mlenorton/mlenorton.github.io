@@ -137,3 +137,5 @@ lat_longs_pretty <- lat_longs %>%
 datatable(lat_longs_pretty)
 
 ```
+
+**Note**: these maps were made using Eli Pousson's [mapbaltimore](https://elipousson.github.io/mapbaltimore/) and [maplayer](https://elipousson.github.io/maplayer/index.html) R packages
