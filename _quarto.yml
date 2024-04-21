@@ -9,7 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd   
-      - analysis.qmd
+      - risk.qmd
       - drop_boxes.qmd
 
 format:
