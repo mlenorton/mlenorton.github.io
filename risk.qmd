@@ -7,7 +7,6 @@ format:
     toc: true
     code-fold: true
     code-summary: "Show the code"
-editor: visual
 bibliography: Risk_lit.bib
 csl: nature.csl
 ---
@@ -26,7 +25,7 @@ Let's talk about what this actually means.
 Your risk is defined as the probability that you will actually get that disease.
 The concept of "true risk" is debated because you either will develop cancer or you won't @Stern-2012 (see the "problem of the single-case" below).
 For now, we assume that this is not pre-determined.
-This estimate for your true risk is 1) practical because neither you, the best researchers, nor the smartest clinicians can be sure that you definitely will or will not develop cancer, and 2) may promote preventive behaviors, such as increased screenings or changes in modifiable risk factors (e.g. diet and exercise), that could help reduce your risk.
+This estimate for your true risk is practical because 1) neither you, the best researchers, nor the smartest clinicians can be sure that you definitely will or will not develop cancer, and 2) it may prompt you to take preventive behaviors, such as increased screenings or changing your modifiable risk factors (e.g. diet and exercise), that could help reduce your risk.
 
 Assuming that a true risk does exist, let's talk about your hypothetical probability of developing cancer.
 We'll let this little blue circle represent a healthy version of you:
@@ -455,7 +454,7 @@ We can feel confident making these predictions when the model is shown to perfor
 Thus, our models can help inform how cancer screening guidelines should set to screen the top X percentage of the population at highest risk, or other allocations of resources.
 
 Additional limitations include the problem of adjusting someone's risk if their covariates change over time - it is currently unknown how this will affect risk since most models only include covariates measured at baseline.
-Issues surrounding generalizability or transportability to other populations for groups that are under-represented in study populations is common.
+Issues surrounding generalizability or transportability to other populations for groups that are under-represented in study populations are also common.
 
 ```{r eval=FALSE}
 # ## ADD: what is a neglibible probability (see Skip Garibaldi - ~min 18)
