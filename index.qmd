@@ -5,6 +5,6 @@ about:
   template: jolla
 ---
 
-I am a 2nd year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health at Johns Hopkins University.
+I am a 3rd year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health at Johns Hopkins University.
 My research focuses on understanding how genetics and environmental factors influence disease risk, and how this risk differs across populations.
 <br>
