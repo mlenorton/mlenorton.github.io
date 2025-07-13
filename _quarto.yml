@@ -3,12 +3,14 @@ project:
   output-dir: docs
 
 website:
-  title: "Emily Norton"
+  title: "Emily L. Norton"
   navbar:
     right:
       - href: index.qmd
         text: Home
-      - about.qmd   
+      - about.qmd 
+      - teaching.qmd
+      - research.qmd
       - risk.qmd
       - drop_boxes.qmd
 
