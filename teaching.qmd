@@ -5,15 +5,15 @@ execute:
 format: html
 ---
 
-## Teaching Philosophy
+## Philosophy
 
 Coming soon.
 
-## Teaching Duties  
+## Duties  
 
 As a lead teaching assistant for the 620 series, I conducted laboratory sessions for up to ~50 students, during which I introduced new statistical concepts and reviewed topics previously covered in lecture.  I tried to make my lectures as participatory as possible, often asking and answering questions throughout my presentation. As a teaching assistant, I held office hours (up to 5 hours per week). I also graded and provided feedback on students’ homework. By TA’ing for the 620 series and a summer workshop, I have become familiar with Stata and gained experience teaching MPH students the statistical concepts listed on the curriculum for PH 321 (e.g. statistical inference, regression, correlation, and hypothesis testing). 
 
-## Courses Taught  
+## Courses   
 
 **Lead Teaching Assistant**  
 - 140.621 *Statistical Methods in Public Health I* (Aug - Oct 2024)  

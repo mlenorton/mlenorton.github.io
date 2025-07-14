@@ -4,15 +4,21 @@ project:
 
 website:
   title: "Emily L. Norton"
+  favicon: favicon1_sm.jpg
   navbar:
     right:
       - href: index.qmd
         text: Home
       - about.qmd 
-      - teaching.qmd
+      - posts.qmd
       - research.qmd
+      - teaching.qmd
       - risk.qmd
       - drop_boxes.qmd
+    left:
+      - icon: github
+        href: https://github.com/mlenorton
+        aria-label: GitHub 
 
 format:
   html:
