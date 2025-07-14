@@ -10,11 +10,10 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd 
-      - posts.qmd
       - research.qmd
       - teaching.qmd
-      - risk.qmd
-      - drop_boxes.qmd
+      - posts.qmd
+
     left:
       - icon: github
         href: https://github.com/mlenorton

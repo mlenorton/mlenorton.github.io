@@ -1,0 +1,220 @@
+---
+title: "Basic Epidemiological Quantities"
+format:
+  html:
+    toc: true
+   # code-fold: true
+bibliography: PAF_refs.bib
+csl: nature.csl
+---
+
+```{r packages, include=FALSE}
+library(tidyverse)
+library(plotly)
+```
+
+## 1. The set up
+Let's define some basic concepts used in epidemiology that will form the foundation for several of our calculations on other pages. Consider a population of 100 people. Some people are sick (the red-filled dots), and some are healthy (the blue-filled dots). The people with a black outline have some risk factor for the disease.
+
+```{r plot disease + RF}
+# Turn off axes
+Noax <- list(    
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE,
+  showgrid = FALSE
+)
+
+# Set up vector for diseased individuals to be colored differently
+N <- 100
+diseased_inds <- union(union(seq(8,100,10),seq(9,100,10)),seq(10,100,10))
+diseased_vec <- vector(mode = "character", length = 100)
+diseased_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+diseased_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_inds <- c(1:20)
+risk_factor_vec <- vector(mode = "character", length = 100)
+risk_factor_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+risk_factor_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_vec[risk_factor_inds] <- 'rgb(0,0,0)'  #'rgb(145, 0, 0)'
+
+
+# Set up text vector
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+z_text[risk_factor_inds] <- 'risk factor'
+
+data_100_diseased_RF <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_100_diseased_RF <- plot_ly(data_100_diseased_RF, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, 
+                      opacity = 0.7, 
+                      color = diseased_vec, 
+                      line = list(color = risk_factor_vec,
+                                  width = 3)),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_100_diseased_RF <- fig_100_diseased_RF %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_100_diseased_RF
+
+```
+Now let's think about how this schematic might look different for different diseases. 
+
+## 2. Incidence of disease
+Some diseases are much less (or more) common - this refers to their incidence. Consider incidence rates of malaria infection (~27% in Nigeria) versus influenza (~15% for the 2023 season in the US) versus breast cancer (~13% of US women over their lifetime). You might notice that these rates are time and space specific, and they vary widely between different populations. For incidence rates, and the other variables discussed below, it is important to precisely determine your population of study and your case definition, otherwise your calculations may be biased.
+
+```{r plot rare disease + RF}
+
+# Set up vector for diseased individuals to be colored differently
+N <- 100
+diseased_inds <- seq(10,100,10)
+diseased_vec <- vector(mode = "character", length = 100)
+diseased_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+diseased_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_inds <- c(1:20)
+risk_factor_vec <- vector(mode = "character", length = 100)
+risk_factor_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+risk_factor_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_vec[risk_factor_inds] <- 'rgb(0,0,0)' #'rgb(145, 0, 0)'
+
+
+# Set up text vector
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+z_text[risk_factor_inds] <- 'risk factor'
+
+data_100_rare_diseased_RF <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_100_rare_diseased_RF <- plot_ly(data_100_rare_diseased_RF, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, 
+                      opacity = 0.7, 
+                      color = diseased_vec, 
+                      line = list(color = risk_factor_vec,
+                                  width = 3)),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_100_rare_diseased_RF <- fig_100_rare_diseased_RF %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_100_rare_diseased_RF
+
+```
+
+## 3. Prevalence of exposure
+Additionally, some risk factors (also known as "exposures") are much more (or less). For example, consider rates of obesity, the prevalence of smoking, family history of cancer, or exposure to harmful occupational chemicals, damaging UV radiation, or poor air quality, etc. The probability that someone in a population has a specific risk factor for the disease is known as the prevalence of the risk factor.
+
+```{r plot disease + common RF}
+# Set up vector for diseased individuals to be colored differently
+N <- 100
+diseased_inds <- union(union(seq(8,100,10),seq(9,100,10)),seq(10,100,10))
+diseased_vec <- vector(mode = "character", length = 100)
+diseased_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+diseased_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_inds <- c(1:60)
+risk_factor_vec <- vector(mode = "character", length = 100)
+risk_factor_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+risk_factor_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_vec[risk_factor_inds] <- 'rgb(0,0,0)' #'rgb(145, 0, 0)'
+
+
+# Set up text vector
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+z_text[risk_factor_inds] <- 'risk factor'
+
+data_100_diseased_common_RF <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_100_diseased_common_RF <- plot_ly(data_100_diseased_common_RF, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, 
+                      opacity = 0.7, 
+                      color = diseased_vec, 
+                      line = list(color = risk_factor_vec,
+                                  width = 3)),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_100_diseased_common_RF <- fig_100_diseased_common_RF %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_100_diseased_common_RF
+
+```
+## 4. Relative risk 
+Finally, some risk factors are more strongly associated with a disease. For example, smoking greatly increases your risk of lung cancer (by ~ 18 times! @Tammemagi:2014aa), while combined hormone replacement therapy only slightly increases the risk of ovarian cancer. @Pfeiffer:2013aa 
+
+```{r plot disease + RF with high RR}
+# Set up vector for diseased individuals to be colored differently
+N <- 100
+diseased_inds <- union(union(seq(8,100,10),seq(9,100,10)),seq(10,100,10))
+diseased_vec <- vector(mode = "character", length = 100)
+diseased_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+diseased_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_inds <- union(union(union(seq(8,80,10),seq(9,80,10)),seq(10,80,10)), seq(7,80,10))
+risk_factor_vec <- vector(mode = "character", length = 100)
+risk_factor_vec[diseased_inds] <- 'rgb(255, 65, 54)'
+risk_factor_vec[-diseased_inds] <- 'rgb(66, 209, 209)'
+risk_factor_vec[risk_factor_inds] <- 'rgb(0,0,0)' #'rgb(145, 0, 0)'
+
+
+# Set up text vector
+z_text <- vector(mode = "character", length = 100)
+z_text[diseased_inds] <- "sick"
+z_text[-diseased_inds] <- "healthy"
+z_text[risk_factor_inds] <- 'risk factor'
+
+data_100_diseased_RF_RR <- data.frame(x = rep(seq(1,10,1), each = 10), y = rep(seq(1,10,1), times = 10), z = z_text)
+
+
+fig_100_diseased_RF_RR <- plot_ly(data_100_diseased_RF_RR, x = ~x, y = ~y, text = ~z, type = 'scatter', mode = 'markers', 
+        marker = list(size = 20, 
+                      opacity = 0.7, 
+                      color = diseased_vec, 
+                      line = list(color = risk_factor_vec,
+                                  width = 3)),
+        hoverinfo = 'text')   # TODO: don't show location; change color
+
+fig_100_diseased_RF_RR <- fig_100_diseased_RF_RR %>% 
+  layout(title = '',
+         xaxis = Noax,
+         yaxis = Noax) %>%
+  config(displayModeBar = FALSE)
+
+fig_100_diseased_RF_RR
+
+```
+
+The strength of the association between the risk factor and the disease is known as the relative risk (RR):
+
+$$ 
+\begin{equation}
+RR = \frac{\Pr(D | E)}{\Pr(D | \bar{E})}
+\end{equation}
+$$ {#eq-RR}
+
+where $\Pr(D | E)$ is the probability that someone is diseased given that they were exposed to the risk factor, and $\Pr(D | \bar{E})$ is the probability that someone is diseased given that they were not exposed to the risk factor. We can estimate these probabilities using observed quantities:
+
+$$
+\begin{equation}
+\widehat{RR} = \frac{\frac{\text{\# exposed people with disease}}{\text{total \# exposed people}}}{\frac{\text{\# unexposed people with disease}}{\text{total \# unexposed people}}}
+\end{equation}
+$$
+```{r include=FALSE, eval=FALSE}
+### NOTE TO SELF: the # symbol was wreaking havoc with the text mode above :( but using \ to break out of latex math mode (or text mode?) fixed everything!
+
+```

@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Emily L. Norton - Population Attributable Fraction (PAF)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon1_sm.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Emily L. Norton</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mlenorton"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../research.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../teaching.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html"> 
+<span class="menu-text">My Blog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Population Attributable Fraction (PAF)</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-set-up" id="toc-the-set-up" class="nav-link active" data-scroll-target="#the-set-up">1. The set-up</a></li>
+  <li><a href="#what-is-population-attributable-fraction" id="toc-what-is-population-attributable-fraction" class="nav-link" data-scroll-target="#what-is-population-attributable-fraction">2. What is population attributable fraction?</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#mathematical-definition" id="toc-mathematical-definition" class="nav-link" data-scroll-target="#mathematical-definition">Mathematical definition</a></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#sec-assumptions" id="toc-sec-assumptions" class="nav-link" data-scroll-target="#sec-assumptions">Assumptions</a></li>
+  <li><a href="#utility" id="toc-utility" class="nav-link" data-scroll-target="#utility">Utility</a></li>
+  </ul></li>
+  <li><a href="#formulae-for-paf" id="toc-formulae-for-paf" class="nav-link" data-scroll-target="#formulae-for-paf">3. Formulae for PAF</a>
+  <ul class="collapse">
+  <li><a href="#original-equation" id="toc-original-equation" class="nav-link" data-scroll-target="#original-equation">Original equation</a></li>
+  <li><a href="#common-alternative-formula" id="toc-common-alternative-formula" class="nav-link" data-scroll-target="#common-alternative-formula">Common alternative formula</a></li>
+  <li><a href="#rosens-formula" id="toc-rosens-formula" class="nav-link" data-scroll-target="#rosens-formula">Rosen’s formula</a></li>
+  <li><a href="#miettinens-formula" id="toc-miettinens-formula" class="nav-link" data-scroll-target="#miettinens-formula">Miettinen’s formula</a></li>
+  <li><a href="#elasticity-formula" id="toc-elasticity-formula" class="nav-link" data-scroll-target="#elasticity-formula">Elasticity formula</a></li>
+  </ul></li>
+  <li><a href="#extensions-of-paf" id="toc-extensions-of-paf" class="nav-link" data-scroll-target="#extensions-of-paf">4. Extensions of PAF</a>
+  <ul class="collapse">
+  <li><a href="#multi-category-risk-factors" id="toc-multi-category-risk-factors" class="nav-link" data-scroll-target="#multi-category-risk-factors">Multi-category risk factors</a></li>
+  <li><a href="#confounding-and-adjusted-relative-risks" id="toc-confounding-and-adjusted-relative-risks" class="nav-link" data-scroll-target="#confounding-and-adjusted-relative-risks">Confounding and adjusted relative risks</a></li>
+  <li><a href="#generalized-attributable-fraction" id="toc-generalized-attributable-fraction" class="nav-link" data-scroll-target="#generalized-attributable-fraction">Generalized attributable fraction</a></li>
+  <li><a href="#multiple-risk-factors" id="toc-multiple-risk-factors" class="nav-link" data-scroll-target="#multiple-risk-factors">Multiple risk factors</a></li>
+  <li><a href="#variance-estimation" id="toc-variance-estimation" class="nav-link" data-scroll-target="#variance-estimation">Variance estimation</a></li>
+  </ul></li>
+  <li><a href="#caution" id="toc-caution" class="nav-link" data-scroll-target="#caution">5. Caution</a></li>
+  <li><a href="#summary-and-conclusions" id="toc-summary-and-conclusions" class="nav-link" data-scroll-target="#summary-and-conclusions">6. Summary and Conclusions</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">7. Acknowledgements</a></li>
+  <li><a href="#sec-derivations" id="toc-sec-derivations" class="nav-link" data-scroll-target="#sec-derivations">8. Derivations</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
+
+
+
+
+<section id="the-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="the-set-up">1. The set-up</h2>
+<p>In the last section, we discussed individual risk and realized that it was really hard to estimate! Fortunately, we found that population-level estimates were much easier to make. We also discussed how risk estimates were based on a model with specific covariates comprising a set of risk factors and potential confounding variables. In this page, we ask questions surrounding how risk for a disease would change at a population level if a risk factor were eliminated - e.g.&nbsp;imagine a world where no one smokes, everyone drinks clean water, we all exercise regularly, etc. Let’s explore this concept called “population attributable fraction” or PAF.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off axes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Noax <span class="ot">&lt;-</span> <span class="fu">list</span>(    </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">""</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">zeroline =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">showline =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">showticklabels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">showgrid =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up vector for diseased individuals to be colored differently</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>diseased_inds <span class="ot">&lt;-</span> <span class="fu">union</span>(<span class="fu">union</span>(<span class="fu">seq</span>(<span class="dv">8</span>,<span class="dv">100</span>,<span class="dv">10</span>),<span class="fu">seq</span>(<span class="dv">9</span>,<span class="dv">100</span>,<span class="dv">10</span>)),<span class="fu">seq</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">10</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>diseased_vec <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"character"</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>diseased_vec[diseased_inds] <span class="ot">&lt;-</span> <span class="st">'rgb(255, 65, 54)'</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>diseased_vec[<span class="sc">-</span>diseased_inds] <span class="ot">&lt;-</span> <span class="st">'rgb(66, 209, 209)'</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>risk_factor_inds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>risk_factor_vec <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"character"</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>risk_factor_vec[diseased_inds] <span class="ot">&lt;-</span> <span class="st">'rgb(255, 65, 54)'</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>risk_factor_vec[<span class="sc">-</span>diseased_inds] <span class="ot">&lt;-</span> <span class="st">'rgb(66, 209, 209)'</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>risk_factor_vec[risk_factor_inds] <span class="ot">&lt;-</span> <span class="st">'rgb(0,0,0)'</span>  <span class="co">#'rgb(145, 0, 0)'</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up text vector</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>z_text <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"character"</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>z_text[diseased_inds] <span class="ot">&lt;-</span> <span class="st">"sick"</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>z_text[<span class="sc">-</span>diseased_inds] <span class="ot">&lt;-</span> <span class="st">"healthy"</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>z_text[risk_factor_inds] <span class="ot">&lt;-</span> <span class="st">'risk factor'</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>data_100_diseased_RF <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="at">y =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">1</span>), <span class="at">times =</span> <span class="dv">10</span>), <span class="at">z =</span> z_text)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>fig_100_diseased_RF <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data_100_diseased_RF, <span class="at">x =</span> <span class="sc">~</span>x, <span class="at">y =</span> <span class="sc">~</span>y, <span class="at">text =</span> <span class="sc">~</span>z, <span class="at">type =</span> <span class="st">'scatter'</span>, <span class="at">mode =</span> <span class="st">'markers'</span>, </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">20</span>, </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                      <span class="at">opacity =</span> <span class="fl">0.7</span>, </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> diseased_vec, </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                      <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> risk_factor_vec,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">width =</span> <span class="dv">3</span>)),</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">hoverinfo =</span> <span class="st">'text'</span>)   <span class="co"># </span><span class="al">TODO</span><span class="co">: don't show location; change color</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>fig_100_diseased_RF <span class="ot">&lt;-</span> fig_100_diseased_RF <span class="sc">%&gt;%</span> </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">'What proportion of this disease is attributable to the risk factor?'</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> Noax,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> Noax) <span class="sc">%&gt;%</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">config</span>(<span class="at">displayModeBar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>fig_100_diseased_RF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-88fe366eebd7e817f899" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-88fe366eebd7e817f899">{"x":{"visdat":{"1173b4572f4aa":["function () ","plotlyVisDat"]},"cur_data":"1173b4572f4aa","attrs":{"1173b4572f4aa":{"x":{},"y":{},"text":{},"mode":"markers","marker":{"size":20,"opacity":0.69999999999999996,"color":["rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)"],"line":{"color":["rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)"],"width":3}},"hoverinfo":"text","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"What proportion of this disease is attributable to the risk factor?","xaxis":{"domain":[0,1],"automargin":true,"title":"","zeroline":false,"showline":false,"showticklabels":false,"showgrid":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"","zeroline":false,"showline":false,"showticklabels":false,"showgrid":false},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"x":[1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10],"y":[1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10],"text":["risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","risk factor","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick","healthy","healthy","healthy","healthy","healthy","healthy","healthy","sick","sick","sick"],"mode":"markers","marker":{"color":["rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)"],"size":20,"opacity":0.69999999999999996,"line":{"color":["rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(0,0,0)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(66, 209, 209)","rgb(255, 65, 54)","rgb(255, 65, 54)","rgb(255, 65, 54)"],"width":3}},"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="what-is-population-attributable-fraction" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-population-attributable-fraction">2. What is population attributable fraction?</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>Developed by Levin (1953),<span class="citation" data-cites="Levin-1953"><sup><a href="#ref-Levin-1953" role="doc-biblioref">1</a></sup></span> the concept of population attributable fraction (PAF) was originally used to estimate the impact of smoking on lung cancer risk. PAF is known by many names, including “population attributable risk”, “population attributable risk proportion”, “population attributable risk percentage”, “etiologic fraction”, “excess fraction”, or sometimes just “attributable risk”.<span class="citation" data-cites="Northridge:1995aa Rockhill:1998aa"><sup><a href="#ref-Northridge:1995aa" role="doc-biblioref">2</a>,<a href="#ref-Rockhill:1998aa" role="doc-biblioref">3</a></sup></span></p>
+</section>
+<section id="mathematical-definition" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-definition">Mathematical definition</h3>
+<p><span id="eq-PAF1"><span class="math display">\[
+PAF = \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR-1) + 1}
+\tag{1}\]</span></span> where <span class="math inline">\(\Pr(E)\)</span> is the probability of exposure and <span class="math inline">\(RR = \frac{\Pr(D | E)}{\Pr(D | \bar{E})}\)</span> is the relative risk.</p>
+</section>
+<section id="interpretations" class="level3">
+<h3 class="anchored" data-anchor-id="interpretations">Interpretations</h3>
+<p>The PAF has two main interpretations. The first is the <strong>fractional reduction in average disease risk</strong> in a population for a given time interval that would be achieved by eliminating a (known disease-causing) exposure while all other risk factors stayed the same. A slightly more intuitive interpretation is the <strong>proportion of disease cases that would be prevented</strong> in a population during a specified time interval if no one were exposed to a given risk factor.<span class="citation" data-cites="Rockhill:1998aa"><sup><a href="#ref-Rockhill:1998aa" role="doc-biblioref">3</a></sup></span></p>
+</section>
+<section id="sec-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="sec-assumptions">Assumptions</h3>
+<p>The fundamental assumptions of PAF are:<span class="citation" data-cites="Levin-1953"><sup><a href="#ref-Levin-1953" role="doc-biblioref">1</a></sup></span> <span class="citation" data-cites="Walter:1983aa"><sup><a href="#ref-Walter:1983aa" role="doc-biblioref">4</a></sup></span></p>
+<ul>
+<li><p><strong>Causation</strong>: The exposure (aka risk factor) causes the disease.</p></li>
+<li><p><strong>Stable Unit Treatment Values (SUTVA)</strong>: No interference between exposures and no hidden variations of exposure.<br>
+</p></li>
+<li><p><strong>No confounding</strong>: We assume that the unexposed and exposed groups do not have underlying differences other than their exposure status. Thus, if an individual who is exposed had not been, they would have the same risk as an unexposed individual.</p></li>
+</ul>
+</section>
+<section id="utility" class="level3">
+<h3 class="anchored" data-anchor-id="utility">Utility</h3>
+<p>PAF is an epidemiologic measure of the potential impact a public health intervention could have on a disease by eliminating a specific risk factor.<span class="citation" data-cites="Rosen:2013aa"><sup><a href="#ref-Rosen:2013aa" role="doc-biblioref">5</a></sup></span> It is important to remember that PAF is the <em>proportion</em> that the disease burden could be reduced - <em>not</em> a direct measure of the number of cases that could be prevented.</p>
+</section>
+</section>
+<section id="formulae-for-paf" class="level2">
+<h2 class="anchored" data-anchor-id="formulae-for-paf">3. Formulae for PAF</h2>
+<p>Now we will investigate several common equations used to calculate PAF (see derivations in <a href="#sec-derivations" class="quarto-xref">Section&nbsp;8</a>). I have attempted to put them in common terms to aid understanding and cross-connections between them. Also, I have estimated the PAF for three disease/risk factor pairs where possible to help orient the reader and to demonstrate how the formulae may differ: BRCA mutation and breast cancer, smoking and lung cancer, and poor air quality and mortality.<span class="citation" data-cites="Northridge:1995aa OKeeffe_2018 Antoniou:2003aa Nelson:2013aa EEA SEER CDC-lung"><sup><a href="#ref-Northridge:1995aa" role="doc-biblioref">2</a>,<a href="#ref-OKeeffe_2018" role="doc-biblioref">6</a>–<a href="#ref-CDC-lung" role="doc-biblioref">11</a></sup></span></p>
+<section id="original-equation" class="level3">
+<h3 class="anchored" data-anchor-id="original-equation">Original equation</h3>
+<p>The original formula was developed by Levin (1953)<span class="citation" data-cites="Levin-1953"><sup><a href="#ref-Levin-1953" role="doc-biblioref">1</a></sup></span> in a paper that discussed the relationship between smoking and lung cancer during a time in history when the causal relationship was just starting to take shape. Levin developed an index <span class="math inline">\(S\)</span> to quantify the “indicated [proportion] of all lung cancer attributable to smoking.” The index, now known as the PAF, was derived as follows:</p>
+<p><span class="math display">\[\begin{align}
+S &amp;= \frac{\text{incidence of lung cancer attributable to smoking}}{\text{total incidence of lung cancer}} \notag \\
+&amp;= \frac{rXb \frac{r-1}{r}}{rXb + X(1-b)} \notag \\
+&amp;= \frac{rb\frac{r-1}{r}}{rb + (1-b)} \notag \\
+&amp;= \frac{b(r-1)}{b(r-1) + 1}
+\end{align}\]</span></p>
+<p>where <span class="math display">\[\begin{align*}
+X &amp;= \text{incidence of lung cancer in non-smokers} \\
+rX &amp;= \text{incidence of lung cancer in smokers} \\
+b &amp;= \text{proportion of general population classified as smokers} \\
+1-b &amp;= \text{proportion of general population classified as non-smokers}
+\end{align*}\]</span></p>
+<p>Thus, a few useful quantities can be defined: <span class="math display">\[\begin{align*}
+rXb + X(1-b) &amp;= \text{incidence of lung cancer in the total population} \\
+r = \frac{rX}{X} &amp;= \frac{\text{incidence of lung cancer in smokers}}{\text{incidence of lung cancer in non-smokers}} \\
+\frac{r-1}{r} &amp;= \text{proportion of lung cancer in smokers attributable to smoking}
+\end{align*}\]</span></p>
+<p>Notice that these are all estimable quantities (i.e.&nbsp;statistics) rather than theoretical quantities. However, we can easily translate the final expression to the theoretical quantities underpinning this index, and generalize them as follows:<span class="citation" data-cites="Benichou:2001aa"><sup><a href="#ref-Benichou:2001aa" role="doc-biblioref">12</a></sup></span></p>
+<p><span class="math display">\[
+PAF = \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR-1) + 1}
+\]</span> where <span class="math inline">\(\Pr(E)\)</span> is the probability of exposure and <span class="math inline">\(RR = \frac{\Pr(D | E)}{\Pr(D | \bar{E})}\)</span> is the relative risk.</p>
+<p>This quantity can be estimated using observable quantities:</p>
+<p><span class="math display">\[
+\widehat{PAF} = \frac{(\text{prevalence of the exposure})(\widehat{RR} - 1)}{(\text{prevalence of the exposure})(\widehat{RR} - 1) + 1}
+\]</span> where <span class="math inline">\(\widehat{RR} = \frac{\text{incidence in exposed group}}{\text{incidence in unexposed group}}\)</span>, usually estimated in a prospective cohort study or approximated by an odds ratio derived from a case-control study when a disease is rare. The prevalence of an exposure is often estimated using cross-sectional studies.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build example disease dataframe</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>deaths_air_quality <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">disease =</span> <span class="st">"mortality"</span>, <span class="at">exposure =</span> <span class="st">"poor air quality"</span>, <span class="at">RR =</span> <span class="fl">1.062</span>, <span class="at">Prev_exp =</span> <span class="dv">1</span>, <span class="at">rate_pop =</span> <span class="dv">1</span>, <span class="at">rate_unexp =</span> <span class="dv">1</span>, <span class="at">pd =</span> <span class="dv">1</span>, <span class="at">num_prev_cases =</span> <span class="dv">3279857</span>)  <span class="co"># European Env Agency: https://www.eea.europa.eu/publications/assessing-the-risks-to-health#:~:text=Relative%20risks%20capture%20the%20increase,be%20assigned%20to%20specific%20individuals; num_prev_cases = total mortality in US in 2022 (https://www.cdc.gov/nchs/fastats/deaths.htm)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>breast_cancer_BRCA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">disease =</span> <span class="st">"breast cancer"</span>, <span class="at">exposure =</span> <span class="st">"BRCA mutation"</span>, <span class="at">RR =</span> <span class="dv">30</span>, <span class="at">Prev_exp =</span> <span class="fl">0.0025</span>, <span class="at">rate_pop =</span> <span class="fl">0.13</span>, <span class="at">rate_unexp =</span> <span class="fl">0.1261</span>, <span class="at">pd =</span> <span class="fl">0.03</span>, <span class="at">num_prev_cases =</span> <span class="dv">240000</span>)  <span class="co"># Table 3 (and Discussion), Antoniou et al., 2003; Nelson et al., 2013 - risk in women; rate_pop = lifetime incidence of BC = 13% in US women, and 3% of cancers are in women with BRCA mutation; num_prev_cases = breast cancer diagnosed per year in women in US,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lung_cancer_smoking <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">disease =</span> <span class="st">"lung cancer"</span>, <span class="at">exposure =</span> <span class="st">"smoking"</span>, <span class="at">RR =</span> <span class="dv">7</span>, <span class="at">Prev_exp =</span> <span class="fl">0.12</span>, <span class="at">rate_pop =</span> <span class="fl">0.0625</span>, <span class="at">rate_unexp =</span> <span class="fl">0.0125</span>, <span class="at">pd =</span> <span class="fl">0.85</span>, <span class="at">num_prev_cases =</span> <span class="dv">238300</span>) <span class="co"># RR: O'Keeffe et al., 2018; Prev_exp: CDC Fast Facts; rate_pop: SEER*Stat; pd: NCI: https://www.cancer.gov/news-events/press-releases/2021/lung-cancer-never-smokers#:~:text=Lung%20cancer%20is%20the%20leading,lung%20cancer%20have%20never%20smoked; rate_pop = lifetime incidence of lung cancer = 1/16, 20% of which occur in non-smokers; num_prev_cases =  estimated number of lung cancer cases each year (see calc: </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 47,660 non-smokers diagnosed with lung cancer each year, accounting for 20% of lung cancer cases (https://www.lungcancerresearchfoundation.org/lung-cancer-facts/?gad_source=1&amp;gclid=CjwKCAjwl4yyBhAgEiwADSEjePEa6HgTX7PzQYb8SNjQNxA6RIU4jvzLIr5VY7pT7uihX02s9tEI4hoCZBUQAvD_BwE)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># total_lung &lt;- 47660/0.2  # --&gt; 238300 total lung cancer cases each year?? </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>example_diseases <span class="ot">&lt;-</span> <span class="fu">rbind</span>(deaths_air_quality,breast_cancer_BRCA, lung_cancer_smoking) <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">descr =</span> <span class="fu">paste0</span>(disease, <span class="st">" due to </span><span class="sc">\n</span><span class="st">"</span>, exposure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Prev_exp <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>calc_PAF_eqn1 <span class="ot">&lt;-</span> <span class="cf">function</span>(RR, Prev_exp) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  PAF <span class="ot">&lt;-</span> (Prev_exp<span class="sc">*</span>(RR <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> Prev_exp<span class="sc">*</span>(RR<span class="dv">-1</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(PAF)}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>paf_df_eqn1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RR =</span> <span class="fu">rep</span>(RR, <span class="at">times =</span> <span class="fu">length</span>(Prev_exp)), <span class="at">Prev_exp =</span> <span class="fu">rep</span>(Prev_exp, <span class="at">each =</span> <span class="fu">length</span>(RR)))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PAF for example diseases</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>example_diseases <span class="ot">&lt;-</span> example_diseases <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PAF_eqn1 =</span> <span class="fu">calc_PAF_eqn1</span>(RR,Prev_exp))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>x_anno_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>, <span class="dv">29</span>, <span class="dv">10</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>y_anno_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.94</span>, <span class="fl">0.1</span>, <span class="fl">0.17</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Make contour plot with points for example diseases</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>paf_df_eqn1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RR, Prev_exp, <span class="at">z =</span> <span class="fu">calc_PAF_eqn1</span>(RR,Prev_exp))) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>() <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> example_diseases, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>,  <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> example_diseases<span class="sc">$</span>x_anno_1, <span class="at">y =</span> example_diseases<span class="sc">$</span>y_anno_1, <span class="at">label =</span> example_diseases<span class="sc">$</span>descr, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Relative risk"</span>, <span class="at">y =</span> <span class="st">"Prevalence of exposure"</span>, <span class="at">title =</span> <span class="st">"PAF: Original formula"</span>, <span class="at">fill =</span> <span class="st">"PAF"</span>) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PAF_files/figure-html/eqn1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="common-alternative-formula" class="level3">
+<h3 class="anchored" data-anchor-id="common-alternative-formula">Common alternative formula</h3>
+<p>Using Bayes Theorem and some algebra, we can alternatively express the original equation in another commonly used form:<span class="citation" data-cites="Rockhill:1998aa"><sup><a href="#ref-Rockhill:1998aa" role="doc-biblioref">3</a></sup></span></p>
+<p><span id="eq-PAF2"><span class="math display">\[
+PAF = \frac{\Pr(D) - \Pr(D|\bar{E})}{\Pr(D)}
+\tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\Pr(D)\)</span> is the probability of disease in a population which may contain unexposed and exposed individuals, and <span class="math inline">\(\Pr(D|\bar{E})\)</span> is the hypothetical probability of disease in that same population if no one were exposed to the risk factor. This quantity can be estimated using observable incidence rates, assuming the unexposed population is representative of the entire population:</p>
+<p><span class="math display">\[
+\widehat{PAF} =  \frac{\text{Incidence}_{\text{population}} - \text{Incidence}_{\text{unexposed}}}{\text{Incidence}_{\text{population}}}
+\]</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rate_pop <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rate_unexp <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>calc_PAF_eqn2 <span class="ot">&lt;-</span> <span class="cf">function</span>(rate_pop, rate_unexp) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  PAF <span class="ot">&lt;-</span> (rate_pop <span class="sc">-</span> rate_unexp)<span class="sc">/</span>rate_pop</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(PAF)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>paf_df_eqn2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">rate_pop =</span> <span class="fu">rep</span>(rate_pop,<span class="at">times =</span> <span class="fu">length</span>(rate_unexp)), <span class="at">rate_unexp =</span> <span class="fu">rep</span>(rate_unexp, <span class="at">each=</span><span class="fu">length</span>(rate_pop)))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>my_breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate PAF for example diseases</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>example_diseases <span class="ot">&lt;-</span> example_diseases <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PAF_eqn2 =</span> <span class="fu">calc_PAF_eqn2</span>(rate_pop,rate_unexp))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>x_anno_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.88</span>, <span class="fl">0.2</span>, <span class="fl">0.16</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>y_anno_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.94</span>, <span class="fl">0.22</span>, <span class="fl">0.05</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>paf_df_eqn2 <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(rate_pop, rate_unexp, <span class="at">z =</span> <span class="fu">calc_PAF_eqn2</span>(rate_pop,rate_unexp))) <span class="sc">+</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>(<span class="at">breaks =</span> my_breaks) <span class="sc">+</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> example_diseases, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>,  <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> example_diseases<span class="sc">$</span>x_anno_2, <span class="at">y =</span> example_diseases<span class="sc">$</span>y_anno_2, <span class="at">label =</span> example_diseases<span class="sc">$</span>descr, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Incidence in population"</span>, <span class="at">y =</span> <span class="st">"Incidence in unexposed"</span>, <span class="at">title =</span> <span class="st">"PAF: Common alternative formula"</span>, <span class="at">fill =</span> <span class="st">"PAF"</span>) <span class="sc">+</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PAF_files/figure-html/eqn2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rosens-formula" class="level3">
+<h3 class="anchored" data-anchor-id="rosens-formula">Rosen’s formula</h3>
+<p>Rosen (2013) aimed to develop a more “intuitive” formula to estimate <span class="math inline">\(PAF\)</span>, which relies on only two quantities:<span class="citation" data-cites="Rosen:2013aa"><sup><a href="#ref-Rosen:2013aa" role="doc-biblioref">5</a></sup></span></p>
+<p><span id="eq-PAF3"><span class="math display">\[
+\widehat{PAF} = \frac{A}{N_d}
+\tag{3}\]</span></span> where <span class="math inline">\(A\)</span> is the number of people who developed the disease because of the exposure and <span class="math inline">\(N_d\)</span> is the total number of people with the disease. While this is a more intuitive formulation, <span class="math inline">\(A\)</span> cannot be estimated directly.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 3 (Rosen et al., 2013)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of people with the disease</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>N_d <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>  <span class="co"># roughly the population of the US</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># People who developed the disease because of the exposure</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>   <span class="co"># roughly the population of the US</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>calc_PAF_eqn3 <span class="ot">&lt;-</span> <span class="cf">function</span>(A,N_d) {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  PAF <span class="ot">&lt;-</span> A<span class="sc">/</span>N_d</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(PAF)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>paf_df_eqn3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rep</span>(N_d,<span class="at">times =</span> <span class="fu">length</span>(A)), <span class="at">y =</span> <span class="fu">rep</span>(A, <span class="at">each=</span><span class="fu">length</span>(N_d)))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>paf_df_eqn3 <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">z =</span> <span class="fu">calc_PAF_eqn3</span>(y,x))) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_contour_filled</span>(<span class="at">breaks =</span> my_breaks) <span class="sc">+</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Total number of cases"</span>, <span class="at">y =</span> <span class="st">"Number of cases due to exposure"</span>, <span class="at">title =</span> <span class="st">"PAF: Rosen's formula"</span>, <span class="at">fill =</span> <span class="st">"PAF"</span>) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse=</span><span class="cn">TRUE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PAF_files/figure-html/eqn3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="miettinens-formula" class="level3">
+<h3 class="anchored" data-anchor-id="miettinens-formula">Miettinen’s formula</h3>
+<p>Another expression developed by Miettinen (1974) relies on the prevalence of the exposure only within the diseased population:<span class="citation" data-cites="Miettinen:1974aa"><sup><a href="#ref-Miettinen:1974aa" role="doc-biblioref">13</a></sup></span></p>
+<p><span id="eq-PAF4"><span class="math display">\[
+PAF = \Pr(E|D) \left( \frac{RR - 1}{RR} \right)
+\tag{4}\]</span></span> where <span class="math inline">\(\Pr(E|D)\)</span> is the probability of exposure among the cases, and <span class="math inline">\(RR\)</span> is relative risk. Thus,</p>
+<p><span class="math display">\[
+\widehat{PAF} = (\text{proportion of cases who were exposed}) \times \left( \frac{\widehat{RR} - 1}{\widehat{RR}} \right)
+\]</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 4</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Relative risk</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion of cases exposed to risk factor</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>calc_PAF_eqn4 <span class="ot">&lt;-</span> <span class="cf">function</span>(pd,RR) {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  PAF <span class="ot">&lt;-</span> (pd<span class="sc">*</span>(RR <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">/</span>(RR)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(PAF)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>paf_df_eqn4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">RR =</span> <span class="fu">rep</span>(RR,<span class="at">times =</span> <span class="fu">length</span>(pd)), <span class="at">pd =</span> <span class="fu">rep</span>(pd, <span class="at">each=</span><span class="fu">length</span>(RR)))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>example_diseases <span class="ot">&lt;-</span> example_diseases <span class="sc">%&gt;%</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PAF_eqn4 =</span> <span class="fu">calc_PAF_eqn4</span>(pd,RR))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>x_anno_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>, <span class="dv">29</span>, <span class="dv">12</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>y_anno_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.94</span>, <span class="fl">0.12</span>, <span class="fl">0.8</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>paf_df_eqn4 <span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RR, pd, <span class="at">z =</span> <span class="fu">calc_PAF_eqn4</span>(pd,RR))) <span class="sc">+</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>(<span class="at">breaks =</span> my_breaks) <span class="sc">+</span> </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">data =</span> example_diseases, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>,  <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> example_diseases<span class="sc">$</span>x_anno_4, <span class="at">y =</span> example_diseases<span class="sc">$</span>y_anno_4, <span class="at">label =</span> example_diseases<span class="sc">$</span>descr, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Relative risk"</span>, <span class="at">y =</span> <span class="st">"Proportion of cases exposed"</span>, <span class="at">title =</span> <span class="st">"PAF: Miettinen's formula"</span>, <span class="at">fill =</span> <span class="st">"PAF"</span>) <span class="sc">+</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PAF_files/figure-html/eqn4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="elasticity-formula" class="level3">
+<h3 class="anchored" data-anchor-id="elasticity-formula">Elasticity formula</h3>
+<p>Finally, for people with a background in economics, it may be useful to think of PAF as the <em>elasticity</em> of incidence (<span class="math inline">\(\Pr(D)\)</span>) for a change in prevalence of a risk factor (<span class="math inline">\(\Pr(E)\)</span>). Elasticity here indicates how disease incidence changes, relative to a baseline incidence, for a given change in the prevalence of a risk factor, relative to a baseline prevalence for that risk factor:<span class="citation" data-cites="Hill:1996aa"><sup><a href="#ref-Hill:1996aa" role="doc-biblioref">14</a></sup></span></p>
+<p><span id="eq-PAF5"><span class="math display">\[
+PAF = \frac{\Pr(E)}{\Pr(D)}\left( \frac{d\Pr(D)}{d\Pr(E)} \right)
+\tag{5}\]</span></span></p>
+<p>where <span class="math display">\[
+\begin{align*}
+&amp; d \cdot = \text{derivative} \\
+&amp; \Pr(E) = \text{prevalence of exposure (or risk factor) in the population} \\
+&amp; \Pr(D) = \text{incidence of disease in the population}
+\end{align*}
+\]</span> This formulation is not easily represented graphically.</p>
+</section>
+</section>
+<section id="extensions-of-paf" class="level2">
+<h2 class="anchored" data-anchor-id="extensions-of-paf">4. Extensions of PAF</h2>
+<section id="multi-category-risk-factors" class="level3">
+<h3 class="anchored" data-anchor-id="multi-category-risk-factors">Multi-category risk factors</h3>
+<p>PAF can also be partitioned into different levels or categories of exposure, and then summed across all (disjoint) categories to get the total PAF. This is known as the “distributive property” of the PAF.<span class="citation" data-cites="Wacholder:1994aa"><sup><a href="#ref-Wacholder:1994aa" role="doc-biblioref">15</a></sup></span> <a href="#eq-PAF4" class="quarto-xref">Equation&nbsp;4</a> can thus be adapted to estimate category-specific PAF for multiple levels of exposure:</p>
+<p><span class="math display">\[
+PAF_i = \Pr(E_i|D) \left( \frac{RR_i - 1}{RR_i} \right)
+\]</span></p>
+<p>where <span class="math inline">\(i\)</span> is the <span class="math inline">\(i^{th}\)</span> disjoint category of exposure, and <span class="math inline">\(RR_i\)</span> is the relative risk for the <span class="math inline">\(i^{th}\)</span> category relative to the reference category, which by definition has <span class="math inline">\(RR_0 = 0\)</span>. By countable additivity, we can then calculate the total PAF as:</p>
+<p><span class="math display">\[
+\begin{align*}
+PAF &amp;= \sum_i PAF_i \\
+&amp;= \sum_i \Pr(E_i|D) \left( \frac{RR_i - 1}{RR_i} \right) \\
+&amp;= 1 - \sum_i \frac{\Pr(E_i|D)}{RR_i}
+\end{align*}
+\]</span></p>
+</section>
+<section id="confounding-and-adjusted-relative-risks" class="level3">
+<h3 class="anchored" data-anchor-id="confounding-and-adjusted-relative-risks">Confounding and adjusted relative risks</h3>
+<p>If the primary assumption of no confounding is violated (see <a href="#sec-assumptions" class="quarto-xref">Section&nbsp;2.4</a>), then the PAF must be adjusted for confounders.<span class="citation" data-cites="Walter:1983aa Benichou:2001aa"><sup><a href="#ref-Walter:1983aa" role="doc-biblioref">4</a>,<a href="#ref-Benichou:2001aa" role="doc-biblioref">12</a></sup></span> <a href="#eq-PAF4" class="quarto-xref">Equation&nbsp;4</a> can be modified to include adjusted relative risks that account for potential confounders:<span class="citation" data-cites="Greenland:1984aa"><sup><a href="#ref-Greenland:1984aa" role="doc-biblioref">16</a></sup></span></p>
+<p><span class="math display">\[
+PAF_a = \Pr(E|D,Z) \left( \frac{RR_a - 1}{RR_a} \right) \\
+\]</span> where <span class="math inline">\(Z\)</span> is the set of confounders that have been used to estimated the adjusted relative risk <span class="math inline">\(\widehat{RR_a}\)</span>.</p>
+</section>
+<section id="generalized-attributable-fraction" class="level3">
+<h3 class="anchored" data-anchor-id="generalized-attributable-fraction">Generalized attributable fraction</h3>
+<p>This extension allows a different baseline distribution for the risk factor rather than assuming that it is eliminated completely:<span class="citation" data-cites="Morgenstern:1982aa"><sup><a href="#ref-Morgenstern:1982aa" role="doc-biblioref">17</a></sup></span></p>
+<p><span class="math display">\[
+GIF = \frac{\Pr(D) - \Pr(D^*)}{\Pr(D)}
+\]</span></p>
+<p>where <span class="math inline">\(\Pr(D)\)</span> and <span class="math inline">\(\Pr(D^*)\)</span> are the probability of disease under the current and modified distributions of exposure, respectively. The <span class="math inline">\(GIF\)</span> allows for a more realistic real-world estimate of what proportion of diseases would be prevented if, for example, half of the overweight population reduced their BMI by a certain percent, fewer people smoked, etc.</p>
+</section>
+<section id="multiple-risk-factors" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-risk-factors">Multiple risk factors</h3>
+<p>It is commonly recognized that most diseases have multiple risk factors, and if at least one could be eliminated, the disease would not develop. Thus, when you want to calculate <span class="math inline">\(PAF\)</span> for several risk factors, it is best to calculate <span class="math inline">\(PAF\)</span> when all of the risk factors are considered simultaneously, otherwise you could erroneously sum <span class="math inline">\(PAF\)</span> for individual risk factors to obtain a total <span class="math inline">\(PAF &gt; 1\)</span>.<span class="citation" data-cites="Rockhill:1998aa"><sup><a href="#ref-Rockhill:1998aa" role="doc-biblioref">3</a></sup></span> The only conditions where the total <span class="math inline">\(PAF = \sum_i PAF_i\)</span> are when 1) no individuals are exposed to multiple risk factors, or 2) when the risks factors have an additive effect on disease incidence.<span class="citation" data-cites="Walter:1983aa"><sup><a href="#ref-Walter:1983aa" role="doc-biblioref">4</a></sup></span></p>
+</section>
+<section id="variance-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="variance-estimation">Variance estimation</h3>
+<p>Variance can be estimated using the Delta method, and recent advances with bootstrapping and jackknifing have been made.<span class="citation" data-cites="Benichou:2001aa"><sup><a href="#ref-Benichou:2001aa" role="doc-biblioref">12</a></sup></span></p>
+</section>
+</section>
+<section id="caution" class="level2">
+<h2 class="anchored" data-anchor-id="caution">5. Caution</h2>
+<p>Although there are relatively few assumptions required in the theoretical PAF, it is often challenging to estimate the it in practice. For example, rarely does one study estimate all of the necessary quantities, so studies often synthesize estimates from different sources. Under this scenario, portability of results becomes a real issue.<span class="citation" data-cites="Steenland:2006aa"><sup><a href="#ref-Steenland:2006aa" role="doc-biblioref">18</a></sup></span> Researchers must be vigilant to ensure that the definition of the exposure and outcome is consistent and that the relative risks are estimated without confounding, or in the case of adjusted relative risks, that the same covariates were adjusted for across studies.</p>
+<p>From a utility standpoint, PAF is most useful to estimate for a risk factor that is modifiable.<span class="citation" data-cites="Rockhill:1998aa"><sup><a href="#ref-Rockhill:1998aa" role="doc-biblioref">3</a></sup></span> For example, calculating the PAF for a disease based on a risk factor of age, sex, race/ethnicity, genetics, other unchangeable quantities, or diagnostic results is not very helpful for preventing the disease.</p>
+</section>
+<section id="summary-and-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="summary-and-conclusions">6. Summary and Conclusions</h2>
+<p>PAF is a useful index to estimate the proportion of cases attributable to a specific risk factor. PAF has many common formulae. Although these equations are relatively simple and rely on few theoretical assumptions, researchers must be diligent in implementing them carefully using estimable quantities, often gleaned from diverse sources. Extensions have been developed to accommodate scenarios where multiple exposure levels exist or to deal with confounding by using adjusted relative risk estimates. Since PAF is a proportion, both common diseases with a low PAF or rare diseases with a high PAF could have a significant number of cases prevented by a public health intervention. Thus, in some situations, its useful to estimate the absolute number of preventable cases by multiplying the PAF by the number of prevalent cases.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: can we make the plots interactive so that we get the PAF when we hover over?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>PAF <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>num_prev_cases <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">4000000</span>,<span class="dv">1000</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>calc_abs_lives <span class="ot">&lt;-</span> <span class="cf">function</span>(PAF, Prev_disease) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  abs_lives <span class="ot">&lt;-</span> PAF <span class="sc">*</span> Prev_disease</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>abs_lives_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PAF =</span> <span class="fu">rep</span>(PAF, <span class="at">times =</span> <span class="fu">length</span>(num_prev_cases)), <span class="at">num_prev_cases =</span> <span class="fu">rep</span>(num_prev_cases, <span class="at">each=</span><span class="fu">length</span>(PAF)))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate abs cases prevented for example diseases</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>example_diseases <span class="ot">&lt;-</span> example_diseases <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PAF =</span> PAF_eqn1)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>x_anno_cases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.55</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>example_diseases<span class="sc">$</span>y_anno_cases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3010857</span>, <span class="dv">500000</span>, <span class="dv">400000</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>my_breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>,<span class="fu">seq</span>(<span class="dv">500000</span>,<span class="dv">4000000</span>,<span class="dv">500000</span>))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>abs_lives_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PAF, num_prev_cases, <span class="at">z =</span> <span class="fu">calc_abs_lives</span>(PAF,num_prev_cases))) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_contour_filled</span>(<span class="at">breaks =</span> my_breaks) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> example_diseases, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>,  <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> example_diseases<span class="sc">$</span>x_anno_cases, <span class="at">y =</span> example_diseases<span class="sc">$</span>y_anno_cases, <span class="at">label =</span> example_diseases<span class="sc">$</span>descr, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Population attributable fraction"</span>, <span class="at">y =</span> <span class="st">"Number of prevalent cases"</span>, <span class="at">title =</span> <span class="st">"Absolute number of cases prevented"</span>, <span class="at">fill =</span> <span class="st">"Cases prevented"</span>) <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_batlow</span>(<span class="at">discrete=</span><span class="cn">TRUE</span>, <span class="at">guide=</span><span class="fu">guide_legend</span>(<span class="at">reverse=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PAF_files/figure-html/absolute preventable-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">7. Acknowledgements</h2>
+<p>Thanks to Grace Ringlein, Ciprian Crainiceanu, and Nilanjan Chatterjee for discussion and feedback on this project.</p>
+</section>
+<section id="sec-derivations" class="level2">
+<h2 class="anchored" data-anchor-id="sec-derivations">8. Derivations</h2>
+<p><a href="#eq-PAF2" class="quarto-xref">Equation&nbsp;2</a></p>
+<p><span class="math display">\[\begin{align*}
+PAF &amp;= \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR-1) + 1} \\
+&amp;= \frac{\Pr(E)(\frac{\Pr(D|E)}{\Pr(D|\bar{E})} - 1)}{\Pr(E)(\frac{\Pr(D|E)}{\Pr(D|\bar{E})}-1) + 1} \\
+&amp;= \frac{\frac{\Pr(D,E)}{\Pr(D|\bar{E})} - \Pr(E)}{\frac{\Pr(D,E)}{\Pr(D|\bar{E})} - \Pr(E) + 1} \times \frac{\Pr(D|\bar{E})}{\Pr(D|\bar{E})}\\
+&amp;= \frac{\Pr(D,E) - \Pr(D|\bar{E}) \Pr(E)}{\Pr(D,E) - \Pr(D|\bar{E}) \Pr(E) + \Pr(D|\bar{E})}  \\
+&amp;= \frac{\Pr(D,E) - \Pr(D|\bar{E}) (1-\Pr(\bar{E}))}{\Pr(D,E) - \Pr(D|\bar{E}) (1-\Pr(\bar{E})) + \Pr(D|\bar{E})}  \\
+&amp;= \frac{\Pr(D,E) - \Pr(D|\bar{E}) +\Pr(D,\bar{E})}{\Pr(D,E) - \Pr(D|\bar{E}) + \Pr(D,\bar{E}) + \Pr(D|\bar{E})}  \\
+
+&amp;= \frac{\Pr(D) - \Pr(D|\bar{E})}{\Pr(D)}
+\end{align*}\]</span></p>
+<p><a href="#eq-PAF3" class="quarto-xref">Equation&nbsp;3</a></p>
+<p><span class="math display">\[\begin{align*}
+PAF &amp;= \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR-1) + 1} \\
+&amp;= \frac{\Pr(E) \left( \frac{\Pr(D|E)}{\Pr(D|\bar{E})} - 1 \right)}{\Pr(E) \left( \frac{\Pr(D|E)}{\Pr(D|\bar{E})}-1\right) + 1} \times \frac{\Pr(D|\bar{E})}{\Pr(D|\bar{E})}\\
+&amp;= \frac{\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E}))}{\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E})) + \Pr(D|\bar{E})} \\
+&amp;= \frac{\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E}))}{\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E})) + (1-\Pr(E) + \Pr(E))\Pr(D|\bar{E})} \times \frac{N}{N}\\
+&amp;= \frac{N \Pr(E)(\Pr(D|E) - \Pr(D|\bar{E}))}{N\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E})) + N\Pr(E))\Pr(D|\bar{E}) + N(1-\Pr(E))\Pr(D|\bar{E})}
+\end{align*}\]</span></p>
+<p>We can estimate this theoretical expression using observable quantities:</p>
+<p><span class="math display">\[\begin{align*}
+\widehat{PAF} &amp;= \frac{A}{A + B + C} \\
+&amp;= \frac{A}{N_d}
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the total number of individuals in the population, <span class="math inline">\(A\)</span> is the number of exposed individuals whose disease can be attributed to their exposure, <span class="math inline">\(B\)</span> is the number of exposed individuals whose disease is not attributed to their exposure, <span class="math inline">\(C\)</span> is the number of non-exposed individuals with the disease, and <span class="math inline">\(N_d\)</span> is the total number of individuals with disase.</p>
+<p><a href="#eq-PAF4" class="quarto-xref">Equation&nbsp;4</a></p>
+<p><span class="math display">\[\begin{align*}
+PAF &amp;= \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR-1) + 1} \\
+&amp;= \frac{\Pr(E)(RR - 1)}{\Pr(E) \left( \frac{\Pr(D|E)}{\Pr(D|\bar{E})}-1 \right) + 1} \times \frac{\Pr(D|\bar{E})}{\Pr(D|\bar{E})} \\
+&amp;= \frac{\Pr(D|\bar{E})\Pr(E)(RR - 1)}{\Pr(E)(\Pr(D|E) - \Pr(D|\bar{E})) + \Pr(D|\bar{E})} \\
+&amp;= \frac{\Pr(D|\bar{E})\Pr(E)(RR - 1)}{\Pr(D, E) - \Pr(D|\bar{E})) + \Pr(D, \bar{E}) + \Pr(D|\bar{E})} \\
+&amp;= \frac{\Pr(D|\bar{E})\Pr(E)(RR - 1)}{\Pr(D)} \times \frac{\frac{\Pr(D|E)}{\Pr(D|\bar{E})}}{\frac{\Pr(D|E)}{\Pr(D|\bar{E})}} \\
+&amp;= \frac{\Pr(D|E)\Pr(E)(RR - 1)}{\Pr(D) \frac{\Pr(D|E)}{\Pr(D|\bar{E})}} \\
+&amp;= \Pr(E|D) \left( \frac{RR - 1}{RR} \right)
+\end{align*}\]</span></p>
+<p><a href="#eq-PAF5" class="quarto-xref">Equation&nbsp;5</a></p>
+<p>First notice that disease incidence (<span class="math inline">\(\Pr(D)\)</span>) can be stated as a function of the prevalance of exposure to a risk factor (<span class="math inline">\(\Pr(E)\)</span>):</p>
+<p><span class="math display">\[\begin{align*}
+\Pr(D) &amp;= \Pr(D,E) + \Pr(D,\bar{E}) \\
+&amp;= \Pr(D|E) \Pr(E) + \Pr(D|\bar{E}) \Pr(\bar{E}) \\
+&amp;= \Pr(D|E) \Pr(E) + \Pr(D|\bar{E}) (1-\Pr(E)) \\
+&amp;= \Pr(D|\bar{E}) + \Pr(E) (\Pr(D|E) - \Pr(D|\bar{E}))
+\end{align*}\]</span></p>
+<p>Then we can take the derivative of incidence with respect to prevalence of exposure:</p>
+<p><span class="math display">\[\begin{align*}
+\frac{d\Pr(D)}{d\Pr(E)} &amp;= \frac{d(\Pr(D|\bar{E}) + \Pr(E) (\Pr(D|E) - \Pr(D|\bar{E})))}{d\Pr(E)} \\
+&amp;= \Pr(D|E) - \Pr(D|\bar{E})
+\end{align*}\]</span></p>
+<p>Thus, we can derive the elasticity equation as follows:</p>
+<p><span class="math display">\[\begin{align*}
+PAF &amp;= \frac{\Pr(E)(RR - 1)}{\Pr(E)(RR - 1) + 1}  \\
+&amp;= \frac{\Pr(E)(\frac{\Pr(D|E)}{\Pr(D|\bar{E})} - 1)}{\Pr(E)(\frac{\Pr(D|E)}{\Pr(D|\bar{E})}-1) + 1} \times \frac{\Pr(D|\bar{E})}{\Pr(D|\bar{E})}\\
+&amp;= \frac{\Pr(E)(\Pr(D|E) -\Pr(D|\bar{E}))}{\Pr(E)(\Pr(D|E) -\Pr(D|\bar{E})) + \Pr(D|\bar{E})} \\
+&amp;= \frac{\Pr(E)(\Pr(D|E) -\Pr(D|\bar{E}))}{\Pr(D)} \\
+&amp;= \frac{\Pr(E)}{\Pr(D)} \frac{d\Pr(D)}{d\Pr(E)} \\
+\end{align*}\]</span></p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Levin-1953" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Levin, M. L. The occurrence of lung cancer in man. <em>Acta-Unio Internationalis Contra Cancrum.</em> <strong>9</strong>, 531–41 (1953).</div>
+</div>
+<div id="ref-Northridge:1995aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Northridge, M. E. <a href="https://doi.org/10.2105/ajph.85.9.1202">Public health methods–attributable risk as a link between causality and public health action.</a> <em>Am J Public Health</em> <strong>85</strong>, 1202–1204 (1995).</div>
+</div>
+<div id="ref-Rockhill:1998aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Rockhill, B., Newman, B. &amp; Weinberg, C. <a href="https://doi.org/10.2105/ajph.88.1.15">Use and misuse of population attributable fractions.</a> <em>Am J Public Health</em> <strong>88</strong>, 15–19 (1998).</div>
+</div>
+<div id="ref-Walter:1983aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Walter, S. D. <a href="https://doi.org/10.1093/oxfordjournals.aje.a113582">Effects of interaction, confounding and observational error on attributable risk estimation.</a> <em>Am J Epidemiol</em> <strong>117</strong>, 598–604 (1983).</div>
+</div>
+<div id="ref-Rosen:2013aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Rosen, L. <a href="https://doi.org/10.3390/ijerph10072932">An intuitive approach to understanding the attributable fraction of disease due to a risk factor: The case of smoking.</a> <em>Int J Environ Res Public Health</em> <strong>10</strong>, 2932–2943 (2013).</div>
+</div>
+<div id="ref-OKeeffe_2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">O’Keeffe, L. <em>et al.</em> Smoking as a risk factor for lung cancer in women and men: A systematic review and meta-analysis. <em>BMJ Open</em> <strong>8</strong>, (2018).</div>
+</div>
+<div id="ref-Antoniou:2003aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Antoniou, A. <em>et al.</em> <a href="https://doi.org/10.1086/375033">Average risks of breast and ovarian cancer associated with BRCA1 or BRCA2 mutations detected in case series unselected for family history: A combined analysis of 22 studies.</a> <em>Am J Hum Genet</em> <strong>72</strong>, 1117–1130 (2003).</div>
+</div>
+<div id="ref-Nelson:2013aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Nelson, H. D. <em>et al.</em> <em><a href="https://www.ncbi.nlm.nih.gov/pubmed/24432435">Risk assessment, genetic counseling, and genetic testing for BRCA-related cancer: Systematic review to update the u.s. Preventive services task force recommendation</a></em>. (2013).</div>
+</div>
+<div id="ref-EEA" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">EEA. <em>Assessing the risks to health from air pollution</em>. <a href="https://www.eea.europa.eu/publications/assessing-the-risks-to-health#:~:text=Relative%20risks%20capture%20the%20increase,be%20assigned%20to%20specific%20individuals">https://www.eea.europa.eu/publications/assessing-the-risks-to-health#:~:text=Relative%20risks%20capture%20the%20increase,be%20assigned%20to%20specific%20individuals</a> (2018).</div>
+</div>
+<div id="ref-SEER" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">NCI. <a href="https://seer.cancer.gov/statfacts/index.html">Surveillance, epidemiology, and end results program</a>.</div>
+</div>
+<div id="ref-CDC-lung" class="csl-entry" role="listitem">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">CDC. <a href="https://www.cdc.gov/cancer/lung/statistics/index.htm">Lung cancer statistics</a>.</div>
+</div>
+<div id="ref-Benichou:2001aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Benichou, J. <a href="https://doi.org/10.1177/096228020101000303">A review of adjusted estimators of attributable risk.</a> <em>Stat Methods Med Res</em> <strong>10</strong>, 195–216 (2001).</div>
+</div>
+<div id="ref-Miettinen:1974aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Miettinen, O. S. <a href="https://api.semanticscholar.org/CorpusID:46509187">Proportion of disease caused or prevented by a given exposure, trait or intervention.</a> <em>American journal of epidemiology</em> <strong>99 5</strong>, 325–32 (1974).</div>
+</div>
+<div id="ref-Hill:1996aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Hill, G. B. <a href="https://doi.org/10.2105/ajph.86.10.1483-a">The value of the population attributable risk percentage.</a> <em>Am J Public Health</em> <strong>86</strong>, 1483 (1996).</div>
+</div>
+<div id="ref-Wacholder:1994aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Wacholder, S., Benichou, J., Heineman, E. F., Hartge, P. &amp; Hoover, R. N. <a href="https://doi.org/10.1093/oxfordjournals.aje.a117252">Attributable risk: Advantages of a broad definition of exposure.</a> <em>Am J Epidemiol</em> <strong>140</strong>, 303–309 (1994).</div>
+</div>
+<div id="ref-Greenland:1984aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Greenland, S. <a href="https://doi.org/10.1002/sim.4780030206">Bias in methods for deriving standardized morbidity ratio and attributable fraction estimates.</a> <em>Stat Med</em> <strong>3</strong>, 131–141 (1984).</div>
+</div>
+<div id="ref-Morgenstern:1982aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Morgenstern, H. &amp; Bursic, E. S. <a href="https://doi.org/10.1007/BF01318961">A method for using epidemiologic data to estimate the potential impact of an intervention on the health status of a target population.</a> <em>J Community Health</em> <strong>7</strong>, 292–309 (1982).</div>
+</div>
+<div id="ref-Steenland:2006aa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Steenland, K. &amp; Armstrong, B. <a href="https://doi.org/10.1097/01.ede.0000229155.05644.43">An overview of methods for calculating the burden of disease due to specific risk factors.</a> <em>Epidemiology</em> <strong>17</strong>, 512–519 (2006).</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

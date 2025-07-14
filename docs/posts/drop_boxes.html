@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Emily L. Norton - My Blog</title>
+<title>Emily L. Norton - Ballot Drop Boxes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon1_sm.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon1_sm.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,77 +101,29 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Emily L. Norton</span>
     </a>
   </div>
@@ -157,23 +141,23 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html"> 
+    <a class="nav-link" href="../research.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./teaching.html"> 
+    <a class="nav-link" href="../teaching.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./posts.html" aria-current="page"> 
+    <a class="nav-link" href="../posts.html"> 
 <span class="menu-text">My Blog</span></a>
   </li>  
 </ul>
@@ -184,155 +168,70 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Ballot Drop Boxes</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#where-can-i-drop-off-my-baltimore-ballot" id="toc-where-can-i-drop-off-my-baltimore-ballot" class="nav-link active" data-scroll-target="#where-can-i-drop-off-my-baltimore-ballot">Where can I drop off my Baltimore ballot?</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">My Blog</h1>
-</div>
-
-
-
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
+<section id="where-can-i-drop-off-my-baltimore-ballot" class="level2">
+<h2 class="anchored" data-anchor-id="where-can-i-drop-off-my-baltimore-ballot">Where can I drop off my Baltimore ballot?</h2>
+<p>Election season is upon us already, and I was super pumped to participate in the new vote by mail program in Baltimore! If you haven’t heard about mail-in voting, check out more election-related info <a href="https://boe.baltimorecity.gov/boe-resources">here</a>. If you’ve already received your mail-in ballot, then you might know that you can return your ballot by mail (just drop it in any USPS box), or if you’d like to save the City a little money, you can return your ballot to any of the 34 drop boxes around Baltimore City. But where exactly are these boxes, you ask? The addresses are posted <a href="https://boe.baltimorecity.gov/sites/default/files/ballot%20drop%20off%20locations-2024.pdf">online</a>, but as a newbie to this town, it wasn’t immediately obvious to me which one was the closest…so I made a map. I hope it helps make your voting experience a little easier too. Just be sure to sign your ballot and return it by May 14, 2024, at 8p (but sooner is even better!).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="drop_box_map.png" class="img-fluid figure-img"></p>
+<figcaption>Drop box locations</figcaption>
+</figure>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make pretty table</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lat_longs_pretty <span class="ot">&lt;-</span> lat_longs <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Name =</span> name,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Address =</span> addr) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(lat_longs_pretty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-78f54ab0bc40b8c9e42c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-78f54ab0bc40b8c9e42c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34"],["Academy for College &amp; Career Exploration School 427","Achievement Academy at Harbor City High School 413","Baltimore Museum of Art","Barclay Elementary School 54","BCCC-Liberty Heights Campus-South Pavilion","Benjamin Franklin HS at Masonville Cove 239","Carver Vocational Technical High School 454","Dickey Hill Elem/Middle School 201","Digital Harbor High School 416","Elections Board Office","Election Board Warehouse","Farring Baybrook Recreation Center","Forest Park High School 406","Frederick Douglas High School 450","Hamilton Elem School 236","Hampden Elem School 55","Herring Run Library","Holabird Academy 229","James McHenry Recreation Center.","Leith Walk Elem/Mid School 245","Morgan State University (Tyler Hall)","Mount Pleasant Church and Ministries","Northwestern School","Patterson High School 405","Paul Laurence Dunbar High School 414","Pimlico Elementary School 223","Public Safety Training Center","Reach! Partnership School 341","Renaissance Academy 433","Southeast Anchor Library","The League for People with Disabilities","Violetville Elementary School 226","Western High School 407","Westside Skill Center"],["1300 W 36th Street 21211","2201 Pinewood Avenue 21214","10 Museum Drive 21218","2900 Barclay Street 21218","2600 Liberty Heights Avenue 21215","1201 Cambria Street 21225","2201 Pressman Street 21216","5025 Dickey Hill Road 21207","1100 Covington Street 21230","417 E. Fayette Street 21202","301 N. Franklintown Road 21223","4501 Farring Court 21225","3701 Eldorado Avenue 21207","2301 Gwynns Falls Pkwy 21217","6101 Old Harford Road 21214","3608 Chestnut Avenue 21211","3801 Erdman Avenue 21213","1500 Imla Street 21224","911 Hollins Street 21223","5915 Glennor Road 21239","1700 E Cold Spring Lane 21251","6000 Radecke Avenue 21206","6900 Park Heights Avenue 21215","100 Kane Street 21224","1400 Orleans Street 21231","4849 Pimlico Road 21215","3500 West Northern Pkwy 21215","2555 Harford Road 21218","1301 McCulloh Street 21217","3601 Eastern Avenue 21224","1111 E. Coldspring Lane 21239","1207 Pine Heights Avenue 21229","4600 Falls Road 21209","4501 Edmondson Avenue 21229"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Name<\/th>\n      <th>Address<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Name","targets":1},{"name":"Address","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><em>Note</em>: this map was made using Eli Pousson’s <a href="https://elipousson.github.io/mapbaltimore/">mapbaltimore</a> and <a href="https://elipousson.github.io/maplayer/index.html">maplayer</a> R packages</p>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1752508196424" data-listing-reading-time-sort="18" data-listing-word-count-sort="3546">
-<div class="thumbnail">
-<p><a href="./posts/PAF.html" class="no-external"></a></p><a href="./posts/PAF.html" class="no-external">
-<p class="card-img-top"><img src="posts/PAF_files/figure-html/eqn1-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/PAF.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/PAF.html" class="no-external">Population Attributable Fraction (PAF)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/PAF.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/PAF.html" class="no-external">In the last section, we discussed individual risk and realized that it was really hard to estimate! Fortunately, we found that population-level estimates were much easier to…</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/PAF.html" class="no-external"></a></p><a href="./posts/PAF.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1752508196424" data-listing-reading-time-sort="8" data-listing-word-count-sort="1576">
-<div class="thumbnail">
-<p><a href="./posts/Basic_epi_quants.html" class="no-external"></a></p><a href="./posts/Basic_epi_quants.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Basic_epi_quants.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Basic_epi_quants.html" class="no-external">Basic Epidemiological Quantities</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Basic_epi_quants.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Basic_epi_quants.html" class="no-external">Let’s define some basic concepts used in epidemiology that will form the foundation for several of our calculations on other pages. Consider a population of 100 people. Some…</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/Basic_epi_quants.html" class="no-external"></a></p><a href="./posts/Basic_epi_quants.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1752507171508" data-listing-reading-time-sort="3" data-listing-word-count-sort="517">
-<div class="thumbnail">
-<p><a href="./posts/drop_boxes.html" class="no-external"></a></p><a href="./posts/drop_boxes.html" class="no-external">
-<p class="card-img-top"><img src="posts/drop_box_map.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/drop_boxes.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/drop_boxes.html" class="no-external">Ballot Drop Boxes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/drop_boxes.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/drop_boxes.html" class="no-external">Election season is upon us already, and I was super pumped to participate in the new vote by mail program in Baltimore! If you haven’t heard about mail-in voting, check out…</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/drop_boxes.html" class="no-external"></a></p><a href="./posts/drop_boxes.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1752508196425" data-listing-reading-time-sort="9" data-listing-word-count-sort="1645">
-<div class="thumbnail">
-<p><a href="./posts/PRS_CLT_demo.html" class="no-external"></a></p><a href="./posts/PRS_CLT_demo.html" class="no-external">
-<p class="card-img-top"><img src="posts/PRS_CLT_demo_files/figure-html/define sim function-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/PRS_CLT_demo.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/PRS_CLT_demo.html" class="no-external">CLT demo with Polygenic Risk Scores (PRS)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/PRS_CLT_demo.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/PRS_CLT_demo.html" class="no-external">The classical CLT states that for a series of independent and identically distributed random variables <span class="math inline">\(X_1, X_2, ...\)</span> with <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span> and <span class="math inline">\(var(X_i) =…</span><span class="math inline"></span><span class="math inline"></span><span class="math display"></span><span class="math inline"></span></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/PRS_CLT_demo.html" class="no-external"></a></p><a href="./posts/PRS_CLT_demo.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1752507248787" data-listing-reading-time-sort="47" data-listing-word-count-sort="9253">
-<div class="thumbnail">
-<p><a href="./posts/risk.html" class="no-external"></a></p><a href="./posts/risk.html" class="no-external">
-<p class="card-img-top"><img src="posts/heads_tails.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/risk.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/risk.html" class="no-external">What is risk?</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/risk.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/risk.html" class="no-external">Imagine that you go to your doctor. You’d like to know your (individual!) risk for some cancer. Let’s talk about what this actually means. Your risk is defined as the…<span class="citation" data-cites="Stern-2012"><sup></sup></span></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/risk.html" class="no-external"></a></p><a href="./posts/risk.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

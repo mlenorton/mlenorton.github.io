@@ -2,7 +2,11 @@
   {
     "listing": "/posts.html",
     "items": [
-      "/posts/analysis.html"
+      "/posts/PAF.html",
+      "/posts/Basic_epi_quants.html",
+      "/posts/drop_boxes.html",
+      "/posts/PRS_CLT_demo.html",
+      "/posts/risk.html"
     ]
   }
 ]
