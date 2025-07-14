@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Emily L. Norton - CLT demo with Polygenic Risk Scores (PRS)</title>
+<title>Emily L. Norton - Central Limit Theorem Demo with Polygenic Risk Scores</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -220,7 +220,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">CLT demo with Polygenic Risk Scores (PRS)</h1>
+      <h1 class="title">Central Limit Theorem Demo with Polygenic Risk Scores</h1>
                       </div>
   </div>
     
@@ -241,8 +241,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#central-limit-theorem-clt" id="toc-central-limit-theorem-clt" class="nav-link active" data-scroll-target="#central-limit-theorem-clt">Central Limit Theorem (CLT)</a></li>
-  <li><a href="#lyapunovs-clt" id="toc-lyapunovs-clt" class="nav-link" data-scroll-target="#lyapunovs-clt">Lyapunov’s CLT</a></li>
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link active" data-scroll-target="#central-limit-theorem">Central Limit Theorem</a></li>
+  <li><a href="#lyapunovs-central-limit-theorem" id="toc-lyapunovs-central-limit-theorem" class="nav-link" data-scroll-target="#lyapunovs-central-limit-theorem">Lyapunov’s Central Limit Theorem</a></li>
   <li><a href="#polygenic-risk-scores" id="toc-polygenic-risk-scores" class="nav-link" data-scroll-target="#polygenic-risk-scores">Polygenic Risk Scores</a></li>
   <li><a href="#simulated-prs-simple-to-complex" id="toc-simulated-prs-simple-to-complex" class="nav-link" data-scroll-target="#simulated-prs-simple-to-complex">Simulated PRS: Simple to complex</a>
   <ul class="collapse">
@@ -261,15 +261,15 @@ window.Quarto = {
 
 
 
-<section id="central-limit-theorem-clt" class="level2">
-<h2 class="anchored" data-anchor-id="central-limit-theorem-clt">Central Limit Theorem (CLT)</h2>
-<p>The classical CLT states that for a series of independent and identically distributed random variables <span class="math inline">\(X_1, X_2, ...\)</span> with <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span> and <span class="math inline">\(var(X_i) = \sigma^2 &lt; \infty\)</span>, a finite sum of those variables <span class="math inline">\(S_n = X_1 + X_2 + ... + X_n\)</span> will be normally distributed and centered at <span class="math inline">\(n \mu\)</span>. Formally, we can write the CLT as follows: <span class="math display">\[
+<section id="central-limit-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h2>
+<p>The classical Central Limit Theorem (CLT) states that for a series of independent and identically distributed random variables <span class="math inline">\(X_1, X_2, ...\)</span> with <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span> and <span class="math inline">\(var(X_i) = \sigma^2 &lt; \infty\)</span>, a finite sum of those variables <span class="math inline">\(S_n = X_1 + X_2 + ... + X_n\)</span> will be normally distributed and centered at <span class="math inline">\(n \mu\)</span>. Formally, we can write the CLT as follows: <span class="math display">\[
 \frac{S_n - n \mu}{\sigma \sqrt{n}} \to^D \mathcal{N}(0,1)
 \]</span> where <span class="math inline">\(\to^D\)</span> indicates convergence in distribution.</p>
 <p>There exist several other versions of the CLT that relax the assumptions of independence and/or identical distribution of the random variables. In this demonstration, we consider random variables that are independent but not identically distributed, effectively demonstrating Lyapunov’s CLT, which does not require the random variables to be identically distributed.</p>
 </section>
-<section id="lyapunovs-clt" class="level2">
-<h2 class="anchored" data-anchor-id="lyapunovs-clt">Lyapunov’s CLT</h2>
+<section id="lyapunovs-central-limit-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="lyapunovs-central-limit-theorem">Lyapunov’s Central Limit Theorem</h2>
 <p>Lyapunov’s CLT relaxes the assumption that the random variables are identically distributed. It states that for a sequence of independent random variables <span class="math inline">\(X_1, X_2, ...\)</span>, if the <span class="math inline">\((2+\epsilon)^{th}\)</span> moment (for <span class="math inline">\(\epsilon &gt; 0\)</span>) exists, and <span class="math inline">\(\mathbb{E}[X_i] = \mu_i &lt; \infty\)</span> and <span class="math inline">\(var(X_i) = \sigma_i^2 &lt; \infty\)</span>, we define</p>
 <p><span class="math display">\[
 r_n^{2+\epsilon} = \sum_{i=1}^{n} \langle \lvert x_i - \mu_i \rvert ^{2+\epsilon} \rangle
@@ -287,18 +287,18 @@ s_n^2 = \sum_{i=1}^n \sigma_i^2
 PRS = \sum_{i=1}^{n} \beta_i G_i
 \]</span> where <span class="math inline">\(\beta_i\)</span> is the effect weight (i.e.&nbsp;effect size) and <span class="math inline">\(G_i \in\{0,1,2\}\)</span> is the genotype for <span class="math inline">\(i = 1,...,n\)</span> genetic variants.</p>
 <p>By construction, <span class="math inline">\(G_i\)</span> are independent (i.e.&nbsp;we only include independent alleles, which we know by calculating their linkage disequilibrium scores), and they have finite mean and variance:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \mathbb{E}[PRS] &amp;= \mathbb{E}[\sum_{i=1}^{n}\beta_i G_i] \\
 &amp;= \sum_{i=1}^{n}\mathbb{E}[\beta_i G_i] \because \text{independent} \\
 &amp;= \sum_{i=1}^{n}\beta_i \mathbb{E}[G_i] \\
 &amp;= \sum_{i=1}^{n}\beta_i p_i &lt; \infty
-\end{align*}\]</span></p>
-<p><span class="math display">\[\begin{align*}
+\end{align*}\]</span>
+<span class="math display">\[\begin{align*}
 var(PRS) &amp;= var(\sum_{i=1}^{n} \beta_i G_i) \\
 &amp;= \sum_{i=1}^{n} var(\beta_i G_i) \because \text{independent} \\
 &amp;= \sum_{i=1}^{n} \beta_i^2 var(G_i) \\
 &amp;= \sum_{i=1}^{n} \beta_i^2 2 p_i (1-p_i) &lt; \infty
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>However, the genotypes are not identically distributed: <span class="math display">\[
 G_i \sim Bin(2,p_i)
 \]</span> where <span class="math inline">\(p_i \in[0,1]\)</span> is the frequency of the <span class="math inline">\(i^{th}\)</span> effect allele.</p>
@@ -337,8 +337,8 @@ G_i \sim Bin(2,p_i)
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">make_table</span>(PRS_id_thyroid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-09a8c8cf546eb1f847f6" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-09a8c8cf546eb1f847f6">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12"],["rs12129938","rs11693806","rs6793295","rs73227498","rs2466076","rs13284787","rs1588635","rs7902587","rs944289","rs116909374","rs56062135","rs2289261"],[1,2,3,5,8,9,9,10,14,14,15,15],[233412561,218292158,169518455,111485904,32432796,4811553,100537802,105694301,36649246,36738361,67455630,67457485],["A","C","T","A","G","A","A","T","T","T","T","C"],["G","G","C","T","T","G","C","C","C","C","C","G"],[0.2776,0.3577,0.207,0.3148,0.2776,0.6981000000000001,0.5247000000000001,0.3436,0.3001,0.5933,0.2151,0.207],[0.795,0.319,0.759,0.872,0.484,0.8100000000000001,0.396,0.109,0.603,0.034,0.253,0.6830000000000001]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>rsID<\/th>\n      <th>Chr<\/th>\n      <th>Position<\/th>\n      <th>Effect allele<\/th>\n      <th>Other allele<\/th>\n      <th>Effect weight<\/th>\n      <th>Effect allele freq.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":25,"columnDefs":[{"className":"dt-right","targets":[2,3,6,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"rsID","targets":1},{"name":"Chr","targets":2},{"name":"Position","targets":3},{"name":"Effect allele","targets":4},{"name":"Other allele","targets":5},{"name":"Effect weight","targets":6},{"name":"Effect allele freq.","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-704bb4510da9e1baa7f8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-704bb4510da9e1baa7f8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12"],["rs12129938","rs11693806","rs6793295","rs73227498","rs2466076","rs13284787","rs1588635","rs7902587","rs944289","rs116909374","rs56062135","rs2289261"],[1,2,3,5,8,9,9,10,14,14,15,15],[233412561,218292158,169518455,111485904,32432796,4811553,100537802,105694301,36649246,36738361,67455630,67457485],["A","C","T","A","G","A","A","T","T","T","T","C"],["G","G","C","T","T","G","C","C","C","C","C","G"],[0.2776,0.3577,0.207,0.3148,0.2776,0.6981000000000001,0.5247000000000001,0.3436,0.3001,0.5933,0.2151,0.207],[0.795,0.319,0.759,0.872,0.484,0.8100000000000001,0.396,0.109,0.603,0.034,0.253,0.6830000000000001]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>rsID<\/th>\n      <th>Chr<\/th>\n      <th>Position<\/th>\n      <th>Effect allele<\/th>\n      <th>Other allele<\/th>\n      <th>Effect weight<\/th>\n      <th>Effect allele freq.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":25,"columnDefs":[{"className":"dt-right","targets":[2,3,6,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"rsID","targets":1},{"name":"Chr","targets":2},{"name":"Position","targets":3},{"name":"Effect allele","targets":4},{"name":"Other allele","targets":5},{"name":"Effect weight","targets":6},{"name":"Effect allele freq.","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
