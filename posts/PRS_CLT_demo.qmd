@@ -58,7 +58,7 @@ By construction, $G_i$ are independent (i.e. we only include independent alleles
 \mathbb{E}[PRS] &= \mathbb{E}[\sum_{i=1}^{n}\beta_i G_i] \\
 &= \sum_{i=1}^{n}\mathbb{E}[\beta_i G_i] \because \text{independent} \\
 &= \sum_{i=1}^{n}\beta_i \mathbb{E}[G_i] \\
-&= \sum_{i=1}^{n}\beta_i p_i < \infty
+&= \sum_{i=1}^{n} \beta_i 2p_i < \infty
 \end{align*}
 ```
 ```{=tex}
