@@ -7,7 +7,7 @@ format: html
 
 ## Philosophy
 
-Coming soon.
+Statistics - combined with science and medicine - helps us understand and improve the complex world around us. I think a basic understanding of statistics benefits everyone. In a research setting, though, I believe that a deeper understanding of statistics is required such that both readers and writers of scientific articles should understand common statistical methods well enough to be able to evaluate the rigor of other papers and apply methods appropriately in our own research. To that end, I enthusiastically endorse widely available and accessible statistical education. In my own classrooms, I encourage active participation and collaboration among students. I also provide additional resources and my own time to support students who may need a little extra help to fill gaps given students' prior training in diverse areas. As a non-traditional student myself, I know these strategies helped facilitate my learning, and now I try to work with my students to find creative ways to support their learning and engagement in the field.  
 
 ## Duties  
 

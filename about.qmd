@@ -4,9 +4,9 @@ title: "About Me"
 
 ### Education and training
 
--   B.A. in biology (math minor) from Bowdoin College
--   M.S. in oceanography from the University of Hawaii at Manoa
--   Currently pursuing a PhD in biostatistics at Johns Hopkins University
+-   B.A. in Biology (Math minor) from Bowdoin College
+-   M.S. in Oceanography from the University of Hawaii at Manoa
+-   PhD in Biostatistics at Johns Hopkins University (anticipated 2027)
 
 ### Professional interests
 
@@ -19,6 +19,8 @@ However, these data don't equally represent all communities.
 I'm interested in how we can make sense of big data, and ways we can fill in missing data, to improve people's quality of life in an equitable way.
 More specifically, my research focuses on understanding how genetics and environmental factors influence disease risk, and how this risk changes across different populations.
 I hope my research will help inform patients and doctors about ways to tailor preventive screenings to individuals who need it most, in order to prevent cancer and efficiently use limited resources.
+
+Download my full [CV](Norton_CV.pdf) here. 
 
 ### Personal interests
 

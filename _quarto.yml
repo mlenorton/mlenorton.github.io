@@ -18,6 +18,9 @@ website:
       - icon: github
         href: https://github.com/mlenorton
         aria-label: GitHub 
+      - icon: linkedin
+        href: https://www.linkedin.com/in/emily-norton-3b684315/
+        aria-label: LinkedIn
 
 format:
   html:

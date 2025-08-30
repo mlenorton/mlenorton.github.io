@@ -7,8 +7,7 @@ format: html
 
 ## Areas of Research  
 
-Coming soon.
-
+My primary research interests are in Statistical Genetics and Genomics, Risk Prediction, Missing Data, and Semi-Parametric Methods. My thesis research focuses on building better risk prediction models that perform equitably across diverse populations to help promote precision prevention. I currently build and validate cancer risk prediction models using very large and diverse data that combine classical risk factors (e.g. demographics, lifestyle, and environmental variables) and polygenic risk scores in a single model. To support this work, I am developing new transfer learning techniques to facilitate combining information across data sources that exhibit complex patterns of missing data. 
 
 ## Papers in Progress
 
@@ -24,11 +23,11 @@ Coming soon.
 
 ## Community Invovlement and Leadership  
 
-[Biostatistics Student Organization (BSO)](https://publichealth.jhu.edu/departments/biostatistics/about/student-learning-groups/biostatistics-student-organization) Mentorship Committee Co-Lead (March 2025 - present)  
-Biostatistics Department Retreat Social Committee & Activity Lead (September 2024)  
-BSO PhD Student Representative (August 2024 - May 2025)  
-Biostatistics Department TA Training Planning Committee (June - August 2024)  
-ENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)  
-BSO Peer Mentor (August 2023 - present)  
+* [Biostatistics Student Organization (BSO)](https://publichealth.jhu.edu/departments/biostatistics/about/student-learning-groups/biostatistics-student-organization) Mentorship Committee Co-Lead (March 2025 - present)  
+* Biostatistics Department Retreat Social Committee & Activity Lead (September 2024)  
+* BSO PhD Student Representative (August 2024 - May 2025)  
+* Biostatistics Department TA Training Planning Committee (June - August 2024)  
+* ENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)  
+* BSO Peer Mentor (August 2023 - present)  
 
 

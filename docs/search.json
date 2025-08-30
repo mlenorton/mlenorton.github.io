@@ -11,7 +11,7 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "Education and training\n\nB.A. in biology (math minor) from Bowdoin College\nM.S. in oceanography from the University of Hawaii at Manoa\nCurrently pursuing a PhD in biostatistics at Johns Hopkins University\n\n\n\nProfessional interests\nPrior to returning for my PhD, I worked for several years doing oceanographic research. During that time, I used mathematical and statistical models to explore biological phenomena, but I wanted to better understand the fundamental principles unpinning these methods. When COVID-19 hit, I decided to pursue statistics through a public health lens.\nAs researchers in the field of public health, we have a lot of data available to us, and more is being collected everyday. However, these data don’t equally represent all communities. I’m interested in how we can make sense of big data, and ways we can fill in missing data, to improve people’s quality of life in an equitable way. More specifically, my research focuses on understanding how genetics and environmental factors influence disease risk, and how this risk changes across different populations. I hope my research will help inform patients and doctors about ways to tailor preventive screenings to individuals who need it most, in order to prevent cancer and efficiently use limited resources.\n\n\nPersonal interests\nIn my free time, I enjoy hiking, foraging, crafting, and baking.\n\n\n\nForaging for mushrooms in the Cascade Mountains in Washington. Photo credit: Austin Voecks"
+    "text": "Education and training\n\nB.A. in Biology (Math minor) from Bowdoin College\nM.S. in Oceanography from the University of Hawaii at Manoa\nPhD in Biostatistics at Johns Hopkins University (anticipated 2027)\n\n\n\nProfessional interests\nPrior to returning for my PhD, I worked for several years doing oceanographic research. During that time, I used mathematical and statistical models to explore biological phenomena, but I wanted to better understand the fundamental principles unpinning these methods. When COVID-19 hit, I decided to pursue statistics through a public health lens.\nAs researchers in the field of public health, we have a lot of data available to us, and more is being collected everyday. However, these data don’t equally represent all communities. I’m interested in how we can make sense of big data, and ways we can fill in missing data, to improve people’s quality of life in an equitable way. More specifically, my research focuses on understanding how genetics and environmental factors influence disease risk, and how this risk changes across different populations. I hope my research will help inform patients and doctors about ways to tailor preventive screenings to individuals who need it most, in order to prevent cancer and efficiently use limited resources.\nDownload my full CV here.\n\n\nPersonal interests\nIn my free time, I enjoy hiking, foraging, crafting, and baking.\n\n\n\nForaging for mushrooms in the Cascade Mountains in Washington. Photo credit: Austin Voecks"
   },
   {
     "objectID": "posts/risk.html",
@@ -151,14 +151,14 @@
     "href": "teaching.html",
     "title": "Teaching",
     "section": "",
-    "text": "Coming soon."
+    "text": "Statistics - combined with science and medicine - helps us understand and improve the complex world around us. I think a basic understanding of statistics benefits everyone. In a research setting, though, I believe that a deeper understanding of statistics is required such that both readers and writers of scientific articles should understand common statistical methods well enough to be able to evaluate the rigor of other papers and apply methods appropriately in our own research. To that end, I enthusiastically endorse widely available and accessible statistical education. In my own classrooms, I encourage active participation and collaboration among students. I also provide additional resources and my own time to support students who may need a little extra help to fill gaps given students’ prior training in diverse areas. As a non-traditional student myself, I know these strategies helped facilitate my learning, and now I try to work with my students to find creative ways to support their learning and engagement in the field."
   },
   {
     "objectID": "teaching.html#philosophy",
     "href": "teaching.html#philosophy",
     "title": "Teaching",
     "section": "",
-    "text": "Coming soon."
+    "text": "Statistics - combined with science and medicine - helps us understand and improve the complex world around us. I think a basic understanding of statistics benefits everyone. In a research setting, though, I believe that a deeper understanding of statistics is required such that both readers and writers of scientific articles should understand common statistical methods well enough to be able to evaluate the rigor of other papers and apply methods appropriately in our own research. To that end, I enthusiastically endorse widely available and accessible statistical education. In my own classrooms, I encourage active participation and collaboration among students. I also provide additional resources and my own time to support students who may need a little extra help to fill gaps given students’ prior training in diverse areas. As a non-traditional student myself, I know these strategies helped facilitate my learning, and now I try to work with my students to find creative ways to support their learning and engagement in the field."
   },
   {
     "objectID": "teaching.html#duties",
@@ -179,14 +179,14 @@
     "href": "research.html",
     "title": "Research",
     "section": "",
-    "text": "Coming soon."
+    "text": "My primary research interests are in Statistical Genetics and Genomics, Risk Prediction, Missing Data, and Semi-Parametric Methods. My thesis research focuses on building better risk prediction models that perform equitably across diverse populations to help promote precision prevention. I currently build and validate cancer risk prediction models using very large and diverse data that combine classical risk factors (e.g. demographics, lifestyle, and environmental variables) and polygenic risk scores in a single model. To support this work, I am developing new transfer learning techniques to facilitate combining information across data sources that exhibit complex patterns of missing data."
   },
   {
     "objectID": "research.html#areas-of-research",
     "href": "research.html#areas-of-research",
     "title": "Research",
     "section": "",
-    "text": "Coming soon."
+    "text": "My primary research interests are in Statistical Genetics and Genomics, Risk Prediction, Missing Data, and Semi-Parametric Methods. My thesis research focuses on building better risk prediction models that perform equitably across diverse populations to help promote precision prevention. I currently build and validate cancer risk prediction models using very large and diverse data that combine classical risk factors (e.g. demographics, lifestyle, and environmental variables) and polygenic risk scores in a single model. To support this work, I am developing new transfer learning techniques to facilitate combining information across data sources that exhibit complex patterns of missing data."
   },
   {
     "objectID": "research.html#papers-in-progress",
@@ -214,7 +214,7 @@
     "href": "research.html#community-invovlement-and-leadership",
     "title": "Research",
     "section": "Community Invovlement and Leadership",
-    "text": "Community Invovlement and Leadership\nBiostatistics Student Organization (BSO) Mentorship Committee Co-Lead (March 2025 - present)\nBiostatistics Department Retreat Social Committee & Activity Lead (September 2024)\nBSO PhD Student Representative (August 2024 - May 2025)\nBiostatistics Department TA Training Planning Committee (June - August 2024)\nENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)\nBSO Peer Mentor (August 2023 - present)"
+    "text": "Community Invovlement and Leadership\n\nBiostatistics Student Organization (BSO) Mentorship Committee Co-Lead (March 2025 - present)\n\nBiostatistics Department Retreat Social Committee & Activity Lead (September 2024)\n\nBSO PhD Student Representative (August 2024 - May 2025)\n\nBiostatistics Department TA Training Planning Committee (June - August 2024)\n\nENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)\n\nBSO Peer Mentor (August 2023 - present)"
   },
   {
     "objectID": "posts/Basic_epi_quants.html",
