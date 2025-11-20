@@ -24,6 +24,6 @@ Download my full [CV](Norton_CV.pdf) here.
 
 ### Personal interests
 
-In my free time, I enjoy hiking, foraging, crafting, and baking.
+In my free time, I enjoy hiking, foraging, crafting, and baking. And making [R Shiny Apps](https://mlenorton.shinyapps.io/bird_dashboard/).
 
 ![Foraging for mushrooms in the Cascade Mountains in Washington. Photo credit: Austin Voecks](Mushrooms_ELN_fromAustinVoecks.jpg){width="50%"}
