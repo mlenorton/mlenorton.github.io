@@ -26,6 +26,7 @@ website:
         aria-label: LinkedIn
       - icon: envelope
         href: mailto:enorton7@jhu.edu
+        aria-label: Email
 
 format:
   html:
