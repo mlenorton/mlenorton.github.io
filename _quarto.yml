@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Emily L. Norton"
+  site-url: "https://mlenorton.github.io"
+  description: "Emily L. Norton — PhD candidate in Biostatistics at Johns Hopkins, cancer risk prediction and polygenic risk scores."
   favicon: favicon1_sm.jpg
   navbar:
     right:
