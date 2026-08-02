@@ -29,15 +29,15 @@ website:
 
 format:
   html:
-    include-in-header: 
-      text: | 
-        <meta name="google-site-verification" content="f7d08FJjM1ythmsmiLQhmNcFtgTU7mQDBkUjXs69_fM" />    
     theme: cosmo
     css: styles.css
     toc: true
     page-layout: full
     code-fold: true
     code-summary: "Show the code"
+    include-in-header: 
+      text: | 
+        <meta name="google-site-verification" content="f7d08FJjM1ythmsmiLQhmNcFtgTU7mQDBkUjXs69_fM" />
 
 editor: visual
 
