@@ -31,8 +31,7 @@ format:
   html:
     include-in-header: 
       text: | 
-        <meta name="google-site-verification" content="t3G5evejCZGwLh-VrMWDTempyhYBmvjTqOqSCFGocxw">
-    theme: cosmo
+        <meta name="google-site-verification" content="f7d08FJjM1ythmsmiLQhmNcFtgTU7mQDBkUjXs69_fM" />    theme: cosmo
     css: styles.css
     toc: true
     page-layout: full
