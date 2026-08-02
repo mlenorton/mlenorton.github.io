@@ -29,6 +29,9 @@ website:
 
 format:
   html:
+    include-in-header: 
+      text: | 
+        <meta name="google-site-verification" content="t3G5evejCZGwLh-VrMWDTempyhYBmvjTqOqSCFGocxw">
     theme: cosmo
     css: styles.css
     toc: true
