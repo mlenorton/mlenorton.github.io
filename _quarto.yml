@@ -22,6 +22,8 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/emily-norton-3b684315/
         aria-label: LinkedIn
+      - icon: envelope
+        href: mailto:enorton7@jhu.edu
 
 format:
   html:
