@@ -7,17 +7,22 @@ format: html
 
 ## Philosophy
 
-Statistics - combined with science and medicine - helps us understand and improve the complex world around us. I think a basic understanding of statistics benefits everyone. In a research setting, though, I believe that a deeper understanding of statistics is required such that both readers and writers of scientific articles should understand common statistical methods well enough to be able to evaluate the rigor of other papers and apply methods appropriately in our own research. To that end, I enthusiastically endorse widely available and accessible statistical education. In my own classrooms, I encourage active participation and collaboration among students. I also provide additional resources and my own time to support students who may need a little extra help to fill gaps given students' prior training in diverse areas. As a non-traditional student myself, I know these strategies helped facilitate my learning, and now I try to work with my students to find creative ways to support their learning and engagement in the field.  
+Statistics - combined with science and medicine - helps us understand and improve the complex world around us. I think everyone should have a basic understanding of statistics (yes, everyone!). In a research setting, though, I believe that a deeper understanding of statistics is required such that both readers and writers of scientific articles should understand common statistical methods well enough to be able to evaluate the rigor of other papers and apply methods appropriately in our own research. To that end, I enthusiastically endorse widely available and accessible statistical education. In my own classrooms, I encourage active participation and collaboration among students. I also provide additional resources and my own time to support students who may need a little extra help to fill gaps given students' prior training in diverse areas. As a non-traditional student myself, I know these strategies helped facilitate my learning, and now I try to work with my students to find creative ways to support their learning and engagement in the field.  
 
 ## Duties  
 
-As a lead teaching assistant for the 620 series, I conducted laboratory sessions for up to ~50 students, during which I introduced new statistical concepts and reviewed topics previously covered in lecture.  I tried to make my lectures as participatory as possible, often asking and answering questions throughout my presentation. As a teaching assistant, I held office hours (up to 5 hours per week). I also graded and provided feedback on students’ homework. By TA’ing for the 620 series and a summer workshop, I have become familiar with Stata and gained experience teaching MPH students a wide array of statistical concepts (e.g. statistical inference, regression, correlation, and hypothesis testing). 
+As a lead teaching assistant for the 620 series, I conduct laboratory sessions for up to ~50 students, during which I introduce new statistical concepts and review topics previously covered in lecture. I try to make my lectures as participatory as possible, often asking and answering questions throughout my presentation. As a teaching assistant, I held office hours (up to 5 hours per week). I also graded and provided feedback on students’ homework. By TA’ing for the 620 series and a summer workshop, I have become familiar with Stata and gained experience teaching MPH students a wide array of statistical concepts (e.g. statistical inference, regression, correlation, and hypothesis testing). 
 
-## Courses   
+## Formal Courses   
+**American University of Armenia**  
+**Instructor**  
+- PH319 *Introductory Biostatistics* (Oct 2026)
 
+**Johns Hopkins University**  
 **Lead Teaching Assistant**  
-- 140.621 *Statistical Methods in Public Health I* (Aug - Oct 2024)  
-- 140.623 *Statistical Methods in Public Health III* (Jan - Mar 2025)  
+- 140.621 *Statistical Methods in Public Health I* (Aug - Oct 2024, 2025, 2026)  
+- 140.622 *Statistical Methods in Public Health II* (Oct - Dec 2026)  
+- 140.623 *Statistical Methods in Public Health III* (Jan - Mar 2025, 2026)  
 
 **Teaching Assistant**  
 - 140.614 *Data Analysis Workshop II* (June 2023)  

@@ -1,0 +1,22 @@
+---
+title: "Service"
+execute:
+  echo: false
+format: html
+---
+
+## Community Involvement and Leadership  
+
+* Biostatistics Department TA Training Planning Committee (2024, 2025, 2026)  
+* [Biostatistics Student Organization (BSO)](https://publichealth.jhu.edu/departments/biostatistics/about/student-learning-groups/biostatistics-student-organization) PhD Student Representative (2024-2025)  
+* Biostatistics Department Retreat Social Committee & Activity Lead (2024)  
+* ENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)  
+
+## Mentorship
+* BSO Peer Mentor (2023-2026)
+* BSO Mentorship Committee Co-Lead (2025-2026)
+
+## Affiliations and Professional Memberships
+* American Association for Cancer Research (AACR) (2026-present)
+* American Statistical Association (ASA) (2024-present)
+* Eastern North American Region (ENAR) of International Biometric Society (IBS) (2024-present)

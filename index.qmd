@@ -5,6 +5,6 @@ about:
   template: jolla
 ---
 
-I am a 4th year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health at Johns Hopkins University.
-My research focuses on understanding how genetics and environmental factors influence disease risk, especially cancer, and how this risk can be predicted equitably across populations.
+I am a 5th year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health at Johns Hopkins University.
+My research focuses on developing and applying statistical tools to accurately predict cancer risk, using classical risk factors and polygenic risk scores, equitably within diverse populations.
 <br>

@@ -11,23 +11,24 @@ My primary research interests are in Statistical Genetics and Genomics, Risk Pre
 
 ## Papers in Progress
 
-Coming soon.
+1. **Norton, E.L.**, Ahearn, T., Garcia-Closas, M., Kraft, P., and Chatterjee, N. Development of a universal breast cancer risk prediction tool for the diverse US population using data from 2.4 million women across 29 cohorts.
+2. **Norton, E.L.**, Kraft, P., Brantley, K., Ahearn, T., Garcia-Closas, M., and Chatterjee, N. GENMETA-Lite: A Fast and Flexible Approach to Federated Learning with Disparate Covariate Information Across Studies.
+3. **Norton, E.L.**, Ahearn, T., Mukhopadhyay, S., Balasubramanian, J., Kim, E., Li, S., Pal Choudhury, P., Garcia-Closas, M., and Chatterjee, N. Validation and population projection of multi-cancer risk incorporating polygenic risk scores and non-genetic factors. 
 
-## Presentations  
-1. **Norton, E.L.**, Ahearn, T., Mukopadhyay, S., Balasubramanian, J., Kim, E., Pal Choudhury, P., Garcia-Closas, M., and Chatterjee, N. Modular and interpretable multicancer risk prediction of the 14 most common cancers in the U.S. to identify high-risk individuals missed by current age-based screening guidelines. inHealth Precision Medicine Symposium, Baltimore, MD. May 2025. Poster presentation.  
-2. Brantley, K.D., Ahearn T., **Norton, E.L.**, Palmer, J., Zirpoli, G., Neuhouser, M.L., Barnett, M., Teras, L., Hodge, J., Rohan, T., Milne, R., Eliassen, A.H., Huang, H., Chen, Y., O'Brien, K., Kitahara, C., Anderson, G., Lee, I, Chatterjee, N., Garcia-Closas, M., Kraft, P., on behalf of Breast Cancer Risk Prediction Project. Performance of common general-population breast cancer risk prediction models in 15 cohorts. American Association for Cancer Research (AACR) Annual Meeting, Chicago, IL. April 2025.   Poster presentation: Abstract #1325.
+
+## Recent Presentations  
+1. **Norton, E.L.**, Kraft, P., Brantley, K., Ahearn, T., Garcia-Closas, M., and Chatterjee, N. Federated learning with missing covariates and distribution shifts. Joint Statistical Meetings. Boston, MA. August 2026. Invited oral presentation. 
+2. **Norton, E.L.**, Ahearn, T., Mukhopadhyay, S., Balasubramanian, J., Kim, E., Li, S., Pal Choudhury, P., Garcia-Closas, M., and Chatterjee, N. Cross-population validation and projection of multi-cancer risk models incorporating genetic and non-genetic factors. American Association for Cancer Research (AACR) Annual Meeting, San Diego, CA. April 2026. Poster presentation: Abstract #6667.
+3. **Norton, E.L.**, Kraft, P., Brantley, K., Ahearn, T., Garcia-Closas, M., and Chatterjee, N. GENMETA-Lite: A Fast and Flexible Approach to Federated Learning with Disparate Covariate Information Across Studies. ENAR 2026 Spring Meeting, Indianapolis, IN. March 2026. Oral presentation.
+4. **Norton, E.L.**, Ahearn, T., Mukopadhyay, S., Balasubramanian, J., Kim, E., Pal Choudhury, P., Garcia-Closas, M., and Chatterjee, N. Modular and interpretable multicancer risk prediction of the 14 most common cancers in the U.S. to identify high-risk individuals missed by current age-based screening guidelines. inHealth Precision Medicine Symposium, Baltimore, MD. May 2025. Poster presentation.  
+5. Brantley, K.D., Ahearn T., **Norton, E.L.**, Palmer, J., Zirpoli, G., Neuhouser, M.L., Barnett, M., Teras, L., Hodge, J., Rohan, T., Milne, R., Eliassen, A.H., Huang, H., Chen, Y., O'Brien, K., Kitahara, C., Anderson, G., Lee, I, Chatterjee, N., Garcia-Closas, M., Kraft, P., on behalf of Breast Cancer Risk Prediction Project. Performance of common general-population breast cancer risk prediction models in 15 cohorts. American Association for Cancer Research (AACR) Annual Meeting, Chicago, IL. April 2025.   Poster presentation: Abstract #1325.
 
 ## Awards  
-[Carol Eliasberg Martin Scholarship](https://publichealth.jhu.edu/offices-and-services/office-of-admissions-services/funding-and-scholarships/funding-for-students/fund/44/carol-eliasberg-martin-scholarship) (July 2025 - June 2026)  
-[Innovation in Cancer Informatics](https://www.the-ici-fund.org/) Grant Recipient (June 2025 - May 2026)  
+- [Louis I. and Thomas D. Dublin Award](https://publichealth.jhu.edu/offices-and-services/office-of-admissions-services/funding-and-scholarships/funding-for-students/fund/92/louis-i-dublin-and-thomas-d-dublin-fund-for-the-advancement-of-epidemiology-and-biostatistics)(2026)   
+- [Carol Eliasberg Martin Scholarship](https://publichealth.jhu.edu/offices-and-services/office-of-admissions-services/funding-and-scholarships/funding-for-students/fund/44/carol-eliasberg-martin-scholarship) (July 2025 - June 2026)  
+- [Innovation in Cancer Informatics](https://www.the-ici-fund.org/) Grant Recipient (June 2025 - May 2026)  
+- [ASA BIOP Women in Statistics and Data Science (WSDS) Conference Travel Award](https://community.amstat.org/biop/awards/wsds) (2025)
 
-## Community Invovlement and Leadership  
 
-* [Biostatistics Student Organization (BSO)](https://publichealth.jhu.edu/departments/biostatistics/about/student-learning-groups/biostatistics-student-organization) Mentorship Committee Co-Lead (March 2025 - present)  
-* Biostatistics Department Retreat Social Committee & Activity Lead (September 2024)  
-* BSO PhD Student Representative (August 2024 - May 2025)  
-* Biostatistics Department TA Training Planning Committee (June - August 2024)  
-* ENAR Fostering Diversity in Biostatistics Workshop Committee (March 2024)  
-* BSO Peer Mentor (August 2023 - present)  
 
 
