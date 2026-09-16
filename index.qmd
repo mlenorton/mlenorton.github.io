@@ -6,5 +6,5 @@ about:
 ---
 
 I am a 5th year PhD candidate in the [Department of Biostatistics](https://publichealth.jhu.edu/departments/biostatistics) in the Bloomberg School of Public Health at Johns Hopkins University.
-My research focuses on developing and applying statistical tools to accurately predict cancer risk, using classical risk factors and polygenic risk scores, equitably within diverse populations. To learn more about me, click on the tabs above, check out my [CV](Norton_CV_080126.pdf), or email me at enorton7 (at) jhu (dot) com.
+My research focuses on developing and applying statistical tools to accurately predict cancer risk, using classical risk factors and polygenic risk scores, equitably within diverse populations. To learn more about me, click on the tabs above, check out my [CV](Norton_CV_091626.pdf) or [Google Scholar](https://scholar.google.com/citations?user=e9haR2wAAAAJ&hl=en), or email me at enorton7 (at) jhu (dot) com.
 <br>
